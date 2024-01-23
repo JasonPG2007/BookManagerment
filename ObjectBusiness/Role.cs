@@ -1,0 +1,20 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ObjectBusiness
+{
+    public class Role
+    {
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [Display(Name = "Role ID")]
+        public int RoleId { get; set; }
+        [Display(Name = "Role name")]
+        public string RoleName { get; set; }
+        public virtual ICollection<Decentralization>? Decentralizations { get; set; }
+    }
+}
