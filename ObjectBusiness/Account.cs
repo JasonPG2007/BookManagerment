@@ -15,7 +15,10 @@ namespace ObjectBusiness
         public int AccountId { get; set; }
         [Display(Name = "User ID")]
         public int UserId { get; set; }
+        [Display(Name = "User name")]
+        public string UserName { get; set; }
+        public string Password { get; set; }
         public virtual Decentralization? Decentralization { get; set; }
-        public virtual User? User {  get; set; } 
+        public virtual User? User { get; set; }
     }
 }
