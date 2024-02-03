@@ -27,6 +27,10 @@ namespace ObjectBusiness
         public string Author { get; set; }
         [Required(ErrorMessage = "Please fill in this information.")]
         public string Content { get; set; }
+        [Required(ErrorMessage = "Please fill in this information.")]
+        public decimal Price { get; set; } = 0; // If Charges false, the price will have to be entered other than 0
+        [Required(ErrorMessage = "Please fill in this information.")]
+        public bool Charges { get; set; }
         [Display(Name = "Date time")]
         public DateTime DateTime { get; set; } = DateTime.Now;
         public virtual CategoryBook? Category { get; set; }

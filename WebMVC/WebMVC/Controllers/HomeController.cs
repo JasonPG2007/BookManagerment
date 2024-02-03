@@ -6,7 +6,7 @@ using System.Net;
 
 namespace WebMVC.Controllers
 {
-    public class HomeController : Controller
+    public class homeController : Controller
     {
         // GET: HomeController
         public ActionResult Index()
