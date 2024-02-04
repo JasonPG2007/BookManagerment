@@ -1,7 +1,17 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
+{
+    options.LoginPath = "/login";
+    options.ReturnUrlParameter = "returnUrl";
+}).AddCookie("admin", options =>
+{
+    options.LoginPath = new PathString("/login");
+});
 
 var app = builder.Build();
 
@@ -18,6 +28,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
@@ -25,6 +36,6 @@ app.MapControllerRoute(
     pattern: "{controller=home}/{action=Index}/{id?}");
 app.MapControllerRoute(
     name: "areas",
-    pattern: "{area=Admin}/{controller=Manager}/{action=Index}/{id?}");
+    pattern: "{area=admin}/{controller=manager}/{action=Index}/{id?}");
 
 app.Run();

@@ -32,6 +32,8 @@ namespace ObjectBusiness
         public decimal Price { get; set; } = 0; // If Charges false, the price will have to be entered other than 0
         [Required(ErrorMessage = "Please fill in this information.")]
         public bool Charges { get; set; }
+        public int Star { get; set; } = 0; // Users rate by number of stars
+        public string Picture { get; set; }
         [Display(Name = "Date time")]
         public DateTime DateTime { get; set; } = DateTime.Now;
         [JsonIgnore]

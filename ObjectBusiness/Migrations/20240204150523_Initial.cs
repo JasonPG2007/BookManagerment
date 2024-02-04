@@ -69,6 +69,8 @@ namespace ObjectBusiness.Migrations
                     Content = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Charges = table.Column<bool>(type: "bit", nullable: false),
+                    Star = table.Column<int>(type: "int", nullable: false),
+                    Picture = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DateTime = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
@@ -89,7 +91,8 @@ namespace ObjectBusiness.Migrations
                     AccountId = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Star = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {

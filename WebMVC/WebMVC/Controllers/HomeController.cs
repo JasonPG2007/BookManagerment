@@ -3,16 +3,23 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Mail;
 using System.Net;
+using Repository;
 
 namespace WebMVC.Controllers
 {
     public class homeController : Controller
     {
+        private readonly IBookRepository bookRepository;
+        public homeController()
+        {
+            bookRepository = new BookRepository();
+        }
         // GET: HomeController
         public ActionResult Index()
         {
             //MailUtils.SendMailGoogleSmtp("ngocdng08@gmail.com", "baoandng07@gmail.com", "Hello", "Demo", "ngocdng08@gmail.com", "baoan123.cntt");
-            return View();
+            var list = bookRepository.GetBooks();
+            return View(list);
         }
         //[HttpPost]
         //public ActionResult Index(string receiver, string subject, string message)
