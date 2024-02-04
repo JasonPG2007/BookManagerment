@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace ObjectBusiness
@@ -22,6 +23,7 @@ namespace ObjectBusiness
         public string City { get; set; }
         public string Region { get; set; }
         public bool Gender { get; set; }
+        [JsonIgnore]
         public virtual Account? Account { get; set; }
     }
 }
