@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -38,5 +39,7 @@ namespace ObjectBusiness
         public DateTime DateTime { get; set; } = DateTime.Now;
         [JsonIgnore]
         public virtual CategoryBook? Category { get; set; }
+        [NotMapped]
+        public IFormFile Images { get; set; }
     }
 }

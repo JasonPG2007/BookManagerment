@@ -103,11 +103,18 @@
                 <div class="col-lg-3 col-sm-6">
                     <div class="accomodation_item text-center">
                         <div class="hotel_img">
-                            <img src="~/image/@item." alt="picture book" width="262" height="270" style="object-fit:cover">
-                            <a href="@Url.Action("details","book",new {id = Model})" class="btn theme_btn button_hover">Order Now</a>
+                            <img src="~/upload/images/@item.Picture" alt="picture book" width="262" height="270" style="object-fit:cover">
+                            <a href="@Url.Action("","order",new {id = item.BookId})" class="btn theme_btn button_hover">Order Now</a>
                         </div>
-                        <a href="@Url.Action("details","book")"><h4 class="sec_h4">Double Deluxe Room</h4></a>
-                        <h5>$250<small>/night</small></h5>
+                        <a href="@Url.Action("details","book",new {id = item.BookId})"><h4 class="sec_h4">@item.BookName</h4></a>
+                        @if (item.Price > 0)
+                        {
+                            <h5>$@item.Price<small>/night</small></h5>
+                        }
+                        else
+                        {
+                            <h5>Free</h5>
+                        }
                     </div>
                 </div>
             }
