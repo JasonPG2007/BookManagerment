@@ -19,10 +19,10 @@ namespace ObjectBusiness
         public string Address { get; set; }
         public string Email { get; set; }
         [Display(Name = "Phone number")]
-        public string PhoneNumber { get; set; }
+        public int PhoneNumber { get; set; }
         public string City { get; set; }
         public string Region { get; set; }
-        public bool Gender { get; set; }
+        public bool Gender { get; set; } // True is male and false is female
         [JsonIgnore]
         public virtual Account? Account { get; set; }
     }

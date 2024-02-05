@@ -19,6 +19,14 @@
 
   <ItemGroup>
     <None Include="wwwroot\js\site.js" />
+    <None Include="wwwroot\Login\css\.DS_Store" />
+    <None Include="wwwroot\Login\css\bootstrap\.DS_Store" />
+    <None Include="wwwroot\Login\css\bootstrap\mixins\.DS_Store" />
+    <None Include="wwwroot\Login\fonts\.DS_Store" />
+    <None Include="wwwroot\Login\images\.DS_Store" />
+    <None Include="wwwroot\Login\js\.DS_Store" />
+    <None Include="wwwroot\Login\scss\.DS_Store" />
+    <None Include="wwwroot\Login\scss\bootstrap\.DS_Store" />
   </ItemGroup>
 
   <ItemGroup>

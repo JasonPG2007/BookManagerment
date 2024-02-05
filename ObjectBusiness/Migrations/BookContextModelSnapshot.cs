@@ -47,6 +47,16 @@ namespace ObjectBusiness.Migrations
                         .IsUnique();
 
                     b.ToTable("Accounts");
+
+                    b.HasData(
+                        new
+                        {
+                            AccountId = 92687906,
+                            Password = "Admin@123.cntt",
+                            Star = 5,
+                            UserId = 781404488,
+                            UserName = "ADMIN"
+                        });
                 });
 
             modelBuilder.Entity("ObjectBusiness.Book", b =>
@@ -196,9 +206,8 @@ namespace ObjectBusiness.Migrations
                     b.Property<bool>("Gender")
                         .HasColumnType("bit");
 
-                    b.Property<string>("PhoneNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("PhoneNumber")
+                        .HasColumnType("int");
 
                     b.Property<string>("Region")
                         .IsRequired()
@@ -207,6 +216,19 @@ namespace ObjectBusiness.Migrations
                     b.HasKey("UserId");
 
                     b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = 781404488,
+                            Address = "Anonymous",
+                            City = "Security",
+                            Email = "anonymous@gmail.com",
+                            FullName = "Anonymous",
+                            Gender = true,
+                            PhoneNumber = 911040107,
+                            Region = "Security"
+                        });
                 });
 
             modelBuilder.Entity("ObjectBusiness.Account", b =>

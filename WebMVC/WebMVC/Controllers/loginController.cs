@@ -1,11 +1,18 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Repository;
+using System.Security.Claims;
 
 namespace WebMVC.Controllers
 {
     public class loginController : Controller
     {
+        private readonly IUserRepository userRepository;
+        public loginController()
+        {
+            userRepository = new UserRepository();
+        }
         // GET: loginController
         public ActionResult Index()
         {
@@ -14,12 +21,38 @@ namespace WebMVC.Controllers
                 return RedirectToAction("", "home");
             }
             return View();
+
         }
-  //      [HttpPost]
-  //      public async Task<ActionResult> Index()
-  //      {
-		//	return View();
-		//}
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Index(string userName, string password)
+        {
+            if (userName != null && password != null)
+            {
+                var checkUser = userRepository.Login(userName, password);
+                if (checkUser)
+                {
+                    Response.Cookies.Append("userName", "Admin");
+                    var claims = new List<Claim>()
+                    {
+                        new Claim(ClaimTypes.Name, userName),
+                        new Claim(ClaimTypes.Role,"Admin")
+                    };
+                    var identity = new ClaimsIdentity(claims, "Admin");
+                    var principal = new ClaimsPrincipal(identity);
+                    await HttpContext.SignInAsync("Admin", principal, new AuthenticationProperties()
+                    {
+                        IsPersistent = true
+                    });
+                    return RedirectToAction("", "home");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "username or password is not correct.");
+                }
+            }
+            return View();
+        }
 
         // GET: loginController/Details/5
         public ActionResult Details(int id)

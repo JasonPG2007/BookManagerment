@@ -27,11 +27,22 @@
                     <li class="nav-item submenu dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">System</a>
                         <ul class="dropdown-menu">
-                            <li class="nav-item"><a class="nav-link" href="@Url.Action("","login")">Login</a></li>
-                            <li class="nav-item"><a class="nav-link" href="@Url.Action("","register")">Register</a></li>
-                            <li class="nav-item"><a class="nav-link" href="~/admin/manager">Manager</a></li>
+                            @if (!Context.Request.Cookies.ContainsKey("userName"))
+                            {
+                                <li class="nav-item"><a class="nav-link" href="@Url.Action("","login")">Login</a></li>
+                                <li class="nav-item"><a class="nav-link" href="@Url.Action("","register")">Register</a></li>
+                            }
+                            else
+                            {
+                                <li class="nav-item"><a class="nav-link" href="@Url.Action("logout","login")">Logout</a></li>
+                                <li class="nav-item"><a class="nav-link" href="~/admin/manager">Manager</a></li>
+                            }
                         </ul>
                     </li>
+                    @if (Context.Request.Cookies.ContainsKey("userName"))
+                    {
+                        <li class="nav-item"><a class="nav-link" >Hello, </a></li>
+                    }
                 </ul>
             </div>
         </nav>

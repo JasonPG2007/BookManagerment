@@ -1,8 +1,11 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebMVC.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
+    [Authorize(AuthenticationSchemes = "Admin")]
     public class managerController : Controller
     {
         // GET: HomeController

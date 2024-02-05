@@ -47,7 +47,7 @@ namespace ObjectBusiness.Migrations
                     FullName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PhoneNumber = table.Column<int>(type: "int", nullable: false),
                     City = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Region = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Gender = table.Column<bool>(type: "bit", nullable: false)
@@ -140,6 +140,16 @@ namespace ObjectBusiness.Migrations
                     { 2, "Staff" },
                     { 3, "User" }
                 });
+
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "UserId", "Address", "City", "Email", "FullName", "Gender", "PhoneNumber", "Region" },
+                values: new object[] { 781404488, "Anonymous", "Security", "anonymous@gmail.com", "Anonymous", true, 911040107, "Security" });
+
+            migrationBuilder.InsertData(
+                table: "Accounts",
+                columns: new[] { "AccountId", "Password", "Star", "UserId", "UserName" },
+                values: new object[] { 92687906, "Admin@123.cntt", 5, 781404488, "ADMIN" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Accounts_UserId",

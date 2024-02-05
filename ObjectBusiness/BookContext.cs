@@ -21,10 +21,31 @@ namespace ObjectBusiness
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            // Add data table Role
             modelBuilder.Entity<Role>().HasData(
                 new Role { RoleId = 1, RoleName = "Admin" },
                 new Role { RoleId = 2, RoleName = "Staff" },
                 new Role { RoleId = 3, RoleName = "User" }
+                );
+
+            // Add data table Account
+            modelBuilder.Entity<User>().HasData(
+                new User
+                {
+                    UserId = 781404488,
+                    Address = "Anonymous",
+                    Region = "Security",
+                    FullName = "Anonymous",
+                    Email = "anonymous@gmail.com",
+                    City = "Security",
+                    Gender = true,
+                    PhoneNumber = 0911040107
+                }
+                );
+
+            // Add data table Account
+            modelBuilder.Entity<Account>().HasData(
+                new Account { AccountId = 92687906, Password = "Admin@123.cntt", UserId = 781404488, UserName = "ADMIN", Star = 5 }
                 );
         }
     }
