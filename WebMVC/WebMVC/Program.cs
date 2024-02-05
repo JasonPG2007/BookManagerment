@@ -8,7 +8,7 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
 {
     options.LoginPath = "/login";
     options.ReturnUrlParameter = "returnUrl";
-}).AddCookie("admin", options =>
+}).AddCookie("Admin", options =>
 {
     options.LoginPath = new PathString("/login");
 });

@@ -11,6 +11,11 @@ namespace DataAccess
     {
         private static BookDAO instance = null;
         private static readonly object Lock = new object();
+        private readonly BookContext db;
+        public BookDAO()
+        {
+            db = new BookContext();
+        }
         public static BookDAO Instance
         {
             get
@@ -27,8 +32,25 @@ namespace DataAccess
         }
         public IEnumerable<Book> GetBooks()
         {
-            using var context = new BookContext();
-            var list = context.Books.ToList();
+            var list = from a in db.Books
+                       join b in db.CategoryBooks
+                       on a.CategoryId equals b.CategoryId
+                       select new Book
+                       {
+                           CategoryId = a.CategoryId,
+                           Author = a.Author,
+                           BookName = a.BookName,
+                           BookId = a.BookId,
+                           Charges = a.Charges,
+                           Content = a.Content,
+                           DateTime = a.DateTime,
+                           Description = a.Description,
+                           Picture = a.Picture,
+                           Price = a.Price,
+                           Star = a.Star,
+                           Title = a.Title,
+                           Set = b.Set
+                       };
             return list;
         }
         public Book GetBookById(int id)

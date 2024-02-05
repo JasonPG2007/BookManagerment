@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebMVC.Controllers
@@ -8,8 +9,17 @@ namespace WebMVC.Controllers
         // GET: loginController
         public ActionResult Index()
         {
+            if (Request.Cookies.ContainsKey("userName"))
+            {
+                return RedirectToAction("", "home");
+            }
             return View();
         }
+  //      [HttpPost]
+  //      public async Task<ActionResult> Index()
+  //      {
+		//	return View();
+		//}
 
         // GET: loginController/Details/5
         public ActionResult Details(int id)
@@ -78,6 +88,12 @@ namespace WebMVC.Controllers
             {
                 return View();
             }
+        }
+        public async Task<IActionResult> logout()
+        {
+            await HttpContext.SignOutAsync("Admin");
+            Response.Cookies.Delete("userName");
+            return RedirectToAction("", "home");
         }
     }
 }

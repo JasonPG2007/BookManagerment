@@ -41,5 +41,7 @@ namespace ObjectBusiness
         public virtual CategoryBook? Category { get; set; }
         [NotMapped]
         public IFormFile Images { get; set; }
+        [NotMapped]
+        public bool Set { get; set; } // Of category book
     }
 }

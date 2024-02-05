@@ -109,7 +109,14 @@
                         <a href="@Url.Action("details","book",new {id = item.BookId})"><h4 class="sec_h4">@item.BookName</h4></a>
                         @if (item.Price > 0)
                         {
-                            <h5>$@item.Price<small>/night</small></h5>
+                            if (item.Set)
+                            {
+                                <h5>$@item.Price<small>/1 book</small></h5>
+                            }
+                            else
+                            {
+                                <h5>$@item.Price<small>/night</small></h5>
+                            }
                         }
                         else
                         {
