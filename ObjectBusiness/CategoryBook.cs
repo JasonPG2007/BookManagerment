@@ -16,6 +16,7 @@ namespace ObjectBusiness
         public int CategoryId { get; set; }
         [Display(Name = "Category name")]
         public string CategoryName { get; set; }
+        public bool Set {  get; set; } // True is a set
         [Display(Name = "Date time")]
         public DateTime DateTime { get; set; } = DateTime.Now;
         [JsonIgnore]
