@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace WebMVC.Controllers
+namespace WebMVC_API.Controllers
 {
     public class registerController : Controller
     {

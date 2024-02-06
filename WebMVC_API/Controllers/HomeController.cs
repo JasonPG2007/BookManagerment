@@ -5,7 +5,7 @@ using System.Net.Mail;
 using System.Net;
 using Repository;
 
-namespace WebMVC.Controllers
+namespace WebMVC_API.Controllers
 {
     public class homeController : Controller
     {

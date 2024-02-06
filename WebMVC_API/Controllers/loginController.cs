@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Repository;
 using System.Security.Claims;
 
-namespace WebMVC.Controllers
+namespace WebMVC_API.Controllers
 {
     public class loginController : Controller
     {

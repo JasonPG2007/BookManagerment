@@ -1,40 +1,32 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Repository;
 
-namespace WebMVC_API.Controllers
+namespace WebMVC_API.Areas.Admin.Controllers
 {
-    public class bookController : Controller
+    [Authorize(Roles = "Admin")]
+    [Authorize(AuthenticationSchemes = "Admin")]
+    public class managerController : Controller
     {
-        private readonly IBookRepository bookRepository;
-        public bookController()
-        {
-            bookRepository = new BookRepository();
-        }
-        // GET: bookController
+        // GET: HomeController
         public ActionResult Index()
         {
             return View();
         }
 
-        // GET: bookController/Details/5
-        public ActionResult details(int id)
+        // GET: HomeController/Details/5
+        public ActionResult Details(int id)
         {
-            var check = bookRepository.GetBookById(id);
-            if (check != null)
-            {
-                return View(check);
-            }
-            return NotFound();
+            return View();
         }
 
-        // GET: bookController/Create
+        // GET: HomeController/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: bookController/Create
+        // POST: HomeController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(IFormCollection collection)
@@ -49,13 +41,13 @@ namespace WebMVC_API.Controllers
             }
         }
 
-        // GET: bookController/Edit/5
+        // GET: HomeController/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: bookController/Edit/5
+        // POST: HomeController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, IFormCollection collection)
@@ -70,13 +62,13 @@ namespace WebMVC_API.Controllers
             }
         }
 
-        // GET: bookController/Delete/5
+        // GET: HomeController/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: bookController/Delete/5
+        // POST: HomeController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)
