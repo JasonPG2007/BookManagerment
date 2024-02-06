@@ -25,16 +25,31 @@ namespace DataAccess
                 }
             }
         }
-        public bool Login(string userName, string password)
+        public string Login(string userName, string password)
         {
             using var context = new BookContext();
             var user = context.Accounts.SingleOrDefault(a => a.UserName.Equals(userName) && a.Password.Equals(password));
             if (user == null)
             {
-                return false;
+                return "This account does not exist.";
             }
-            //var checkDecentralization = context.Decentralizations
-            return true;
+            var checkDecentralization = from a in context.Decentralizations
+                                        join b in context.Roles
+                                        on a.RoleId equals b.RoleId
+                                        join c in context.Accounts
+                                        on a.AccountId equals c.AccountId
+                                        where c.AccountId.Equals(user.AccountId)
+                                        select new Decentralization
+                                        {
+                                            RoleName = b.RoleName,
+                                            UserName = c.UserName
+                                        };
+            var result = "";
+            foreach (var check in checkDecentralization)
+            {
+                result = check.RoleName;
+            }
+            return result;
         }
     }
 }

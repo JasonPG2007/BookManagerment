@@ -50,7 +50,7 @@
                     </li>
                     @if (Context.Request.Cookies.ContainsKey("userName"))
                     {
-                        <li class="nav-item"><a class="nav-link">Hello, </a></li>
+                        <li class="nav-item"><a class="nav-link">Hello, @Context.Request.Cookies["userName"]</a></li>
                     }
                 </ul>
             </div>

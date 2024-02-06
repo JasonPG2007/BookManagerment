@@ -33,7 +33,7 @@ namespace WebMVC.Controllers
             if (userName != null && password != null)
             {
                 var checkUser = userRepository.Login(userName, password);
-                if (checkUser)
+                if (checkUser != "This account does not exist.")
                 {
                     Response.Cookies.Append("userName", "Admin");
                     var claims = new List<Claim>()

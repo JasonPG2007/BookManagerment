@@ -22,5 +22,9 @@ namespace ObjectBusiness
         public virtual Account? Account { get; set; }
         [JsonIgnore]
         public virtual Role? Role { get; set; }
+        [NotMapped]
+        public string RoleName { get; set; }
+        [NotMapped]
+        public string UserName { get; set; }
     }
 }

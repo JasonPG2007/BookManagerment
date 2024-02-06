@@ -27,7 +27,7 @@ namespace WebAPI.Controllers
         public bool Get(string username, string password)
         {
             var user = userRepository.Login(username, password);
-            if (user)
+            if (user != "This account does not exist.")
             {
                 return true;
             }

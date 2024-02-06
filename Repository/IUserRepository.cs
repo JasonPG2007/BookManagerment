@@ -8,6 +8,6 @@ namespace Repository
 {
     public interface IUserRepository
     {
-        public bool Login(string userName, string password);
+        public string Login(string userName, string password);
     }
 }

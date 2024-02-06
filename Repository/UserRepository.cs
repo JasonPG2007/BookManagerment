@@ -9,6 +9,6 @@ namespace Repository
 {
     public class UserRepository : IUserRepository
     {
-        public bool Login(string userName, string password) => UserDAO.Instance.Login(userName, password);
+        public string Login(string userName, string password) => UserDAO.Instance.Login(userName, password);
     }
 }
