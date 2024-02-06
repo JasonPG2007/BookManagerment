@@ -47,6 +47,11 @@ namespace ObjectBusiness
             modelBuilder.Entity<Account>().HasData(
                 new Account { AccountId = 92687906, Password = "Admin@123.cntt", UserId = 781404488, UserName = "ADMIN", Star = 5 }
                 );
+
+            // Add data table Decentralization
+            modelBuilder.Entity<Decentralization>().HasData(
+                new Decentralization { DecentralizationId = 996554186, AccountId = 92687906, RoleId = 1 }
+                );
         }
     }
 }

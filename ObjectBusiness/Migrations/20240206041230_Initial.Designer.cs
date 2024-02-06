@@ -12,7 +12,7 @@ using ObjectBusiness;
 namespace ObjectBusiness.Migrations
 {
     [DbContext(typeof(BookContext))]
-    [Migration("20240205124217_Initial")]
+    [Migration("20240206041230_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -152,6 +152,14 @@ namespace ObjectBusiness.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("Decentralizations");
+
+                    b.HasData(
+                        new
+                        {
+                            DecentralizationId = 996554186,
+                            AccountId = 92687906,
+                            RoleId = 1
+                        });
                 });
 
             modelBuilder.Entity("ObjectBusiness.Role", b =>

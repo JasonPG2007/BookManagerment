@@ -38,6 +38,9 @@
                             else
                             {
                                 <li class="nav-item"><a class="nav-link" href="@Url.Action("logout","login")">Logout</a></li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="@Url.Action("","login",new {change_account = "true"})">Change account</a>
+                                </li>
                                 if (cookies == "Admin")
                                 {
                                     <li class="nav-item"><a class="nav-link" href="~/admin/manager">Manager</a></li>

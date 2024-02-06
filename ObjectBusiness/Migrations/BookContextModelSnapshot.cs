@@ -149,6 +149,14 @@ namespace ObjectBusiness.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("Decentralizations");
+
+                    b.HasData(
+                        new
+                        {
+                            DecentralizationId = 996554186,
+                            AccountId = 92687906,
+                            RoleId = 1
+                        });
                 });
 
             modelBuilder.Entity("ObjectBusiness.Role", b =>

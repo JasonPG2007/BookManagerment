@@ -14,11 +14,14 @@ namespace WebMVC.Controllers
             userRepository = new UserRepository();
         }
         // GET: loginController
-        public ActionResult Index()
+        public ActionResult Index(string change_account)
         {
-            if (Request.Cookies.ContainsKey("userName"))
+            if (change_account == null)
             {
-                return RedirectToAction("", "home");
+                if (Request.Cookies.ContainsKey("userName"))
+                {
+                    return RedirectToAction("", "home");
+                }
             }
             return View();
 

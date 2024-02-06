@@ -151,6 +151,11 @@ namespace ObjectBusiness.Migrations
                 columns: new[] { "AccountId", "Password", "Star", "UserId", "UserName" },
                 values: new object[] { 92687906, "Admin@123.cntt", 5, 781404488, "ADMIN" });
 
+            migrationBuilder.InsertData(
+                table: "Decentralizations",
+                columns: new[] { "DecentralizationId", "AccountId", "RoleId" },
+                values: new object[] { 996554186, 92687906, 1 });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Accounts_UserId",
                 table: "Accounts",
