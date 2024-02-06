@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Repository;
+using System.Net.Http.Headers;
 using System.Security.Claims;
 
 namespace WebMVC_API.Controllers
@@ -9,8 +10,14 @@ namespace WebMVC_API.Controllers
     public class loginController : Controller
     {
         private readonly IUserRepository userRepository;
+        private readonly string ApiUrl = "";
+        private readonly HttpClient client;
         public loginController()
         {
+            client = new HttpClient();
+            var typeMedia = new MediaTypeWithQualityHeaderValue("application/json");
+            client.DefaultRequestHeaders.Accept.Add(typeMedia);
+            ApiUrl = "https://localhost:7004/api/UserAPI";
             userRepository = new UserRepository();
         }
         // GET: loginController
@@ -29,8 +36,8 @@ namespace WebMVC_API.Controllers
         {
             if (userName != null && password != null)
             {
-                var checkUser = userRepository.Login(userName, password);
-                if (checkUser)
+                HttpResponseMessage responseMessage = await client.GetAsync($"{ApiUrl}/{userName}/{password}");
+                if (responseMessage.IsSuccessStatusCode)
                 {
                     Response.Cookies.Append("userName", "Admin");
                     var claims = new List<Claim>()
