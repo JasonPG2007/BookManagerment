@@ -66,6 +66,20 @@ namespace WebMVC.Controllers
                                 IsPersistent = true
                             });
                             return RedirectToAction("", "home");
+                        case "Staff":
+                            Response.Cookies.Append("userName", "Staff");
+                            var claimsStaff = new List<Claim>()
+                    {
+                        new Claim(ClaimTypes.Name, userName),
+                        new Claim(ClaimTypes.Role,"Staff")
+                    };
+                            var identityStaff = new ClaimsIdentity(claimsStaff, "Staff");
+                            var principalStaff = new ClaimsPrincipal(identityStaff);
+                            await HttpContext.SignInAsync("Staff", principalStaff, new AuthenticationProperties()
+                            {
+                                IsPersistent = true
+                            });
+                            return RedirectToAction("", "home");
                     }
                 }
                 else
@@ -147,7 +161,8 @@ namespace WebMVC.Controllers
         public async Task<IActionResult> logout()
         {
             await HttpContext.SignOutAsync("Admin");
-            await HttpContext.SignOutAsync("OtherAuthenticationSchemeName");
+            await HttpContext.SignOutAsync("User");
+            await HttpContext.SignOutAsync("Staff");
             Response.Cookies.Delete("userName");
             return RedirectToAction("", "home");
         }

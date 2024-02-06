@@ -14,6 +14,9 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
 }).AddCookie("User", options =>
 {
     options.LoginPath = new PathString("/login");
+}).AddCookie("Staff", options =>
+{
+    options.LoginPath = new PathString("/login");
 });
 
 var app = builder.Build();
