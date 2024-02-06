@@ -16,10 +16,12 @@ namespace ObjectBusiness
         public int UserId { get; set; }
         [Display(Name = "Full name")]
         public string FullName { get; set; }
+        public int Age { get; set; }
         public string Address { get; set; }
         public string Email { get; set; }
+        [RegularExpression("^0[1-9]\\d\\d{3}\\d{4}$")]
         [Display(Name = "Phone number")]
-        public int PhoneNumber { get; set; }
+        public string PhoneNumber { get; set; }
         public string City { get; set; }
         public string Region { get; set; }
         public bool Gender { get; set; } // True is male and false is female

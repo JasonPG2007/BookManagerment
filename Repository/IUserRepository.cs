@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ObjectBusiness;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,5 +10,8 @@ namespace Repository
     public interface IUserRepository
     {
         public string Login(string userName, string password);
+        public void UpdateUser(User user);
+        public void DeleteUser(int id);
+        public void Register(string userName, string password, string phoneNumber, string city, string birthName, int age, string address, string email, string region, bool gender);
     }
 }

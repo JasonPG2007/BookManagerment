@@ -7,6 +7,7 @@ namespace ObjectBusiness
     {
         public virtual DbSet<Book> Books { get; set; }
         public virtual DbSet<CategoryBook> CategoryBooks { get; set; }
+        public virtual DbSet<AccessLog> AccessLog { get; set; }
         public virtual DbSet<Decentralization> Decentralizations { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<Account> Accounts { get; set; }
@@ -39,7 +40,7 @@ namespace ObjectBusiness
                     Email = "anonymous@gmail.com",
                     City = "Security",
                     Gender = true,
-                    PhoneNumber = 0911040107
+                    PhoneNumber = "0911040107"
                 }
                 );
 

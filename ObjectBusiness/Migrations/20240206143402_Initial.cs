@@ -14,6 +14,20 @@ namespace ObjectBusiness.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "AccessLog",
+                columns: table => new
+                {
+                    AccessLogId = table.Column<int>(type: "int", nullable: false),
+                    IpAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    VisitCount = table.Column<int>(type: "int", nullable: false),
+                    DateAccess = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AccessLog", x => x.AccessLogId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "CategoryBooks",
                 columns: table => new
                 {
@@ -45,9 +59,10 @@ namespace ObjectBusiness.Migrations
                 {
                     UserId = table.Column<int>(type: "int", nullable: false),
                     FullName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Age = table.Column<int>(type: "int", nullable: false),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PhoneNumber = table.Column<int>(type: "int", nullable: false),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     City = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Region = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Gender = table.Column<bool>(type: "bit", nullable: false)
@@ -143,8 +158,8 @@ namespace ObjectBusiness.Migrations
 
             migrationBuilder.InsertData(
                 table: "Users",
-                columns: new[] { "UserId", "Address", "City", "Email", "FullName", "Gender", "PhoneNumber", "Region" },
-                values: new object[] { 781404488, "Anonymous", "Security", "anonymous@gmail.com", "Anonymous", true, 911040107, "Security" });
+                columns: new[] { "UserId", "Address", "Age", "City", "Email", "FullName", "Gender", "PhoneNumber", "Region" },
+                values: new object[] { 781404488, "Anonymous", 0, "Security", "anonymous@gmail.com", "Anonymous", true, "0911040107", "Security" });
 
             migrationBuilder.InsertData(
                 table: "Accounts",
@@ -182,6 +197,9 @@ namespace ObjectBusiness.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "AccessLog");
+
             migrationBuilder.DropTable(
                 name: "Books");
 

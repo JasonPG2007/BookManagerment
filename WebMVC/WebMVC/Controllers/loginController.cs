@@ -35,19 +35,38 @@ namespace WebMVC.Controllers
                 var checkUser = userRepository.Login(userName, password);
                 if (checkUser != "This account does not exist.")
                 {
-                    Response.Cookies.Append("userName", "Admin");
-                    var claims = new List<Claim>()
+                    switch (checkUser)
+                    {
+                        case "Admin":
+
+                            Response.Cookies.Append("userName", "Admin");
+                            var claims = new List<Claim>()
                     {
                         new Claim(ClaimTypes.Name, userName),
                         new Claim(ClaimTypes.Role,"Admin")
                     };
-                    var identity = new ClaimsIdentity(claims, "Admin");
-                    var principal = new ClaimsPrincipal(identity);
-                    await HttpContext.SignInAsync("Admin", principal, new AuthenticationProperties()
+                            var identity = new ClaimsIdentity(claims, "Admin");
+                            var principal = new ClaimsPrincipal(identity);
+                            await HttpContext.SignInAsync("Admin", principal, new AuthenticationProperties()
+                            {
+                                IsPersistent = true
+                            });
+                            return RedirectToAction("", "home");
+                        case "User":
+                            Response.Cookies.Append("userName", "User");
+                            var claimsUser = new List<Claim>()
                     {
-                        IsPersistent = true
-                    });
-                    return RedirectToAction("", "home");
+                        new Claim(ClaimTypes.Name, userName),
+                        new Claim(ClaimTypes.Role,"User")
+                    };
+                            var identityUser = new ClaimsIdentity(claimsUser, "User");
+                            var principalUser = new ClaimsPrincipal(identityUser);
+                            await HttpContext.SignInAsync("User", principalUser, new AuthenticationProperties()
+                            {
+                                IsPersistent = true
+                            });
+                            return RedirectToAction("", "home");
+                    }
                 }
                 else
                 {
@@ -128,6 +147,7 @@ namespace WebMVC.Controllers
         public async Task<IActionResult> logout()
         {
             await HttpContext.SignOutAsync("Admin");
+            await HttpContext.SignOutAsync("OtherAuthenticationSchemeName");
             Response.Cookies.Delete("userName");
             return RedirectToAction("", "home");
         }

@@ -12,7 +12,7 @@ using ObjectBusiness;
 namespace ObjectBusiness.Migrations
 {
     [DbContext(typeof(BookContext))]
-    [Migration("20240206041230_Initial")]
+    [Migration("20240206143402_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -24,6 +24,26 @@ namespace ObjectBusiness.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("ObjectBusiness.AccessLog", b =>
+                {
+                    b.Property<int>("AccessLogId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("DateAccess")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("IpAddress")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("VisitCount")
+                        .HasColumnType("int");
+
+                    b.HasKey("AccessLogId");
+
+                    b.ToTable("AccessLog");
+                });
 
             modelBuilder.Entity("ObjectBusiness.Account", b =>
                 {
@@ -202,6 +222,9 @@ namespace ObjectBusiness.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("Age")
+                        .HasColumnType("int");
+
                     b.Property<string>("City")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -217,8 +240,9 @@ namespace ObjectBusiness.Migrations
                     b.Property<bool>("Gender")
                         .HasColumnType("bit");
 
-                    b.Property<int>("PhoneNumber")
-                        .HasColumnType("int");
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Region")
                         .IsRequired()
@@ -233,11 +257,12 @@ namespace ObjectBusiness.Migrations
                         {
                             UserId = 781404488,
                             Address = "Anonymous",
+                            Age = 0,
                             City = "Security",
                             Email = "anonymous@gmail.com",
                             FullName = "Anonymous",
                             Gender = true,
-                            PhoneNumber = 911040107,
+                            PhoneNumber = "0911040107",
                             Region = "Security"
                         });
                 });
