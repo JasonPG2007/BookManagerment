@@ -15,5 +15,6 @@ namespace Repository
         public void DeleteAccount(int id);
         public bool GetUserName(string userName);
         public bool ResetPassword(string userName, string newPassword);
+        public IEnumerable<Account> GetUserByIdAccount(int id);
     }
 }

@@ -14,9 +14,18 @@ namespace WebMVC.Controllers
             accountRepository = new AccountRepository();
         }
         // GET: profileController1
-        public ActionResult Index()
+        public ActionResult Index(int id)
         {
-            return View();
+            if (id <= 0)
+            {
+                return View("error");
+            }
+            var list = accountRepository.GetUserByIdAccount(id);
+            if (list.Count() <= 0)
+            {
+                return View("error");
+            }
+            return View(list);
         }
 
         // GET: profileController1/Details/5

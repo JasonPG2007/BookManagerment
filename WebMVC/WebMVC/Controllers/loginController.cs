@@ -39,7 +39,12 @@ namespace WebMVC.Controllers
                     {
                         case "Admin":
 
-                            Response.Cookies.Append("userName", "Admin");
+                            var getUserNameAdmin = userRepository.GetFullName(userName, password);
+                            foreach (var item in getUserNameAdmin)
+                            {
+                                Response.Cookies.Append("userName", item.FullName);
+                                Response.Cookies.Append("idUser", item.AccountId.ToString());
+                            }
                             var claims = new List<Claim>()
                     {
                         new Claim(ClaimTypes.Name, userName),
@@ -57,7 +62,7 @@ namespace WebMVC.Controllers
                             foreach (var item in getUserName)
                             {
                                 Response.Cookies.Append("userName", item.FullName);
-                                HttpContext.Session.SetString("idUser", item.AccountId.ToString());
+                                Response.Cookies.Append("idUser", item.AccountId.ToString());
                             }
                             var claimsUser = new List<Claim>()
                     {
@@ -72,7 +77,12 @@ namespace WebMVC.Controllers
                             });
                             return RedirectToAction("", "home");
                         case "Staff":
-                            Response.Cookies.Append("userName", "Staff");
+                            var getUserName2 = userRepository.GetFullName(userName, password);
+                            foreach (var item in getUserName2)
+                            {
+                                Response.Cookies.Append("userName", item.FullName);
+                                Response.Cookies.Append("idUser", item.AccountId.ToString());
+                            }
                             var claimsStaff = new List<Claim>()
                     {
                         new Claim(ClaimTypes.Name, userName),

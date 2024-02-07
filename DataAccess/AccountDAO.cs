@@ -9,6 +9,7 @@ namespace DataAccess
 {
     public class AccountDAO
     {
+        private readonly BookContext db;
         private static AccountDAO instance = null;
         private static readonly object Lock = new object();
         public static AccountDAO Instance
@@ -25,6 +26,38 @@ namespace DataAccess
                 }
             }
         }
+        public AccountDAO()
+        {
+            db = new BookContext();
+        }
+        #region GetUserByIdAccount function
+        public IEnumerable<Account> GetUserByIdAccount(int id)
+        {
+            var checkAccountContains = from a in db.Accounts
+                                       join b in db.Users
+                                       on a.UserId equals b.UserId
+                                       where a.AccountId == id
+                                       select new Account
+                                       {
+                                           AccountId = a.AccountId,
+                                           UserName = a.UserName,
+                                           Password = a.Password,
+                                           Star = a.Star,
+                                           Point = a.Point,
+                                           FullName = b.FullName,
+                                           Age = b.Age,
+                                           Address = b.Address,
+                                           City = b.City,
+                                           DateRegister = b.DateRegister,
+                                           Email = b.Email,
+                                           Gender = b.Gender,
+                                           PhoneNumber = b.PhoneNumber,
+                                           Picture = b.Picture,
+                                           Region = b.Region
+                                       };
+            return checkAccountContains;
+        }
+        #endregion
 
         #region GetAccountById function
         public Account GetAccountById(int id)
