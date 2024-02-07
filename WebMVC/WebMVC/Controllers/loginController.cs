@@ -51,7 +51,7 @@ namespace WebMVC.Controllers
                             {
                                 IsPersistent = true
                             });
-                            return RedirectToAction("", "home");
+                            return Redirect("~/admin/manager");
                         case "User":
                             Response.Cookies.Append("userName", "User");
                             var claimsUser = new List<Claim>()
