@@ -12,7 +12,7 @@ using ObjectBusiness;
 namespace ObjectBusiness.Migrations
 {
     [DbContext(typeof(BookContext))]
-    [Migration("20240206143402_Initial")]
+    [Migration("20240207023753_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -50,6 +50,9 @@ namespace ObjectBusiness.Migrations
                     b.Property<int>("AccountId")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -75,6 +78,7 @@ namespace ObjectBusiness.Migrations
                         new
                         {
                             AccountId = 92687906,
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Password = "Admin@123.cntt",
                             Star = 5,
                             UserId = 781404488,
@@ -161,6 +165,9 @@ namespace ObjectBusiness.Migrations
                     b.Property<int>("AccountId")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("DateDecentralization")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("RoleId")
                         .HasColumnType("int");
 
@@ -178,6 +185,7 @@ namespace ObjectBusiness.Migrations
                         {
                             DecentralizationId = 996554186,
                             AccountId = 92687906,
+                            DateDecentralization = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             RoleId = 1
                         });
                 });
@@ -229,6 +237,9 @@ namespace ObjectBusiness.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("DateRegister")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -259,6 +270,7 @@ namespace ObjectBusiness.Migrations
                             Address = "Anonymous",
                             Age = 0,
                             City = "Security",
+                            DateRegister = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "anonymous@gmail.com",
                             FullName = "Anonymous",
                             Gender = true,

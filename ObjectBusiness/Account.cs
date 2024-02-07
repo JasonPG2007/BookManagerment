@@ -20,6 +20,7 @@ namespace ObjectBusiness
         public string UserName { get; set; }
         public string Password { get; set; }
         public int Star { get; set; } = 0; // Users rate by number of stars
+        public DateTime DateCreated { get; set; }
         [JsonIgnore]
         public virtual Decentralization? Decentralization { get; set; }
         [JsonIgnore]

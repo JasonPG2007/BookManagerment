@@ -1,0 +1,51 @@
+﻿@{
+
+}
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Book Store - Forgot password</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="~/Login/css/style.css">
+    <link rel="icon" href="~/image/logo book store.png" type="image/png">
+
+</head>
+<body class="img js-fullheight" style="background-image: url(@Url.Content("~/Login/images/book_store.jpg"));">
+    <section class="ftco-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-6 col-lg-4">
+                    <div class="login-wrap p-0">
+                        <h3 class="mb-4 text-center">Reset password?</h3>
+                        @using (Html.BeginForm("", "login", FormMethod.Post, new { @class = "signin-form" }))
+                        {
+                            @Html.AntiForgeryToken()
+
+                            @Html.ValidationSummary(true, "")
+                            <div class="form-group">
+                                <input type="text" name="forgotPassword" class="form-control" placeholder="Enter your user name" required>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="form-control btn btn-primary submit px-3">Reset password</button>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="~/Login/js/jquery.min.js"></script>
+    <script src="~/Login/js/popper.js"></script>
+    <script src="~/Login/js/bootstrap.min.js"></script>
+    <script src="~/Login/js/main.js"></script>
+
+</body>
+</html>
+

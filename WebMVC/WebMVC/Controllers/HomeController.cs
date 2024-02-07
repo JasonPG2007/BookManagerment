@@ -9,14 +9,21 @@ namespace WebMVC.Controllers
 {
     public class homeController : Controller
     {
+        private readonly IUserRepository userRepository;
         private readonly IBookRepository bookRepository;
         public homeController()
         {
             bookRepository = new BookRepository();
+            userRepository = new UserRepository();
         }
         // GET: HomeController
         public ActionResult Index()
         {
+            var listUser = userRepository.GetUsers();
+            if (listUser == null)
+            {
+                Response.Cookies.Delete("userName");
+            }
             //MailUtils.SendMailGoogleSmtp("ngocdng08@gmail.com", "baoandng07@gmail.com", "Hello", "Demo", "ngocdng08@gmail.com", "baoan123.cntt");
             var list = bookRepository.GetBooks();
             return View(list);

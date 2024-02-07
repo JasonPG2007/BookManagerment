@@ -65,7 +65,8 @@ namespace ObjectBusiness.Migrations
                     PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     City = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Region = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Gender = table.Column<bool>(type: "bit", nullable: false)
+                    Gender = table.Column<bool>(type: "bit", nullable: false),
+                    DateRegister = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -108,7 +109,8 @@ namespace ObjectBusiness.Migrations
                     UserId = table.Column<int>(type: "int", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Star = table.Column<int>(type: "int", nullable: false)
+                    Star = table.Column<int>(type: "int", nullable: false),
+                    DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -127,7 +129,8 @@ namespace ObjectBusiness.Migrations
                 {
                     DecentralizationId = table.Column<int>(type: "int", nullable: false),
                     AccountId = table.Column<int>(type: "int", nullable: false),
-                    RoleId = table.Column<int>(type: "int", nullable: false)
+                    RoleId = table.Column<int>(type: "int", nullable: false),
+                    DateDecentralization = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -158,18 +161,18 @@ namespace ObjectBusiness.Migrations
 
             migrationBuilder.InsertData(
                 table: "Users",
-                columns: new[] { "UserId", "Address", "Age", "City", "Email", "FullName", "Gender", "PhoneNumber", "Region" },
-                values: new object[] { 781404488, "Anonymous", 0, "Security", "anonymous@gmail.com", "Anonymous", true, "0911040107", "Security" });
+                columns: new[] { "UserId", "Address", "Age", "City", "DateRegister", "Email", "FullName", "Gender", "PhoneNumber", "Region" },
+                values: new object[] { 781404488, "Anonymous", 0, "Security", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "anonymous@gmail.com", "Anonymous", true, "0911040107", "Security" });
 
             migrationBuilder.InsertData(
                 table: "Accounts",
-                columns: new[] { "AccountId", "Password", "Star", "UserId", "UserName" },
-                values: new object[] { 92687906, "Admin@123.cntt", 5, 781404488, "ADMIN" });
+                columns: new[] { "AccountId", "DateCreated", "Password", "Star", "UserId", "UserName" },
+                values: new object[] { 92687906, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Admin@123.cntt", 5, 781404488, "ADMIN" });
 
             migrationBuilder.InsertData(
                 table: "Decentralizations",
-                columns: new[] { "DecentralizationId", "AccountId", "RoleId" },
-                values: new object[] { 996554186, 92687906, 1 });
+                columns: new[] { "DecentralizationId", "AccountId", "DateDecentralization", "RoleId" },
+                values: new object[] { 996554186, 92687906, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Accounts_UserId",

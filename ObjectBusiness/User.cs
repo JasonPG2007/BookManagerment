@@ -25,6 +25,7 @@ namespace ObjectBusiness
         public string City { get; set; }
         public string Region { get; set; }
         public bool Gender { get; set; } // True is male and false is female
+        public DateTime DateRegister{ get; set; }
         [JsonIgnore]
         public virtual Account? Account { get; set; }
     }

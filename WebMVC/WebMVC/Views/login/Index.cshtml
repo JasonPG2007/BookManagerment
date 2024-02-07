@@ -1,5 +1,5 @@
 ﻿@{
-   
+
 }
 <!doctype html>
 <html lang="en">
@@ -17,6 +17,14 @@
 
 </head>
 <body class="img js-fullheight" style="background-image: url(@Url.Content("~/Login/images/book_store.jpg"));">
+    <style>
+        .validation-summary-errors {
+            background-color: red;
+            color: white;
+            border-radius: 5px;
+            width: 100%;
+        }
+    </style>
     <section class="ftco-section">
         <div class="container">
             <div class="row justify-content-center">
@@ -47,14 +55,23 @@
                                     </label>
                                 </div>
                                 <div class="w-50 text-md-right">
-                                    <a href="#" style="color: #fff">Forgot Password</a>
+                                    <a href="@Url.Action("","forgotpassword")" style="color: #fff">Forgot Password</a>
                                 </div>
                             </div>
                         }
                         <p class="w-100 text-center">&mdash; Or &mdash;</p>
-                        <div class="social d-flex text-center">
-                            <a href="@Url.Action("","register")" class="px-2 py-2 mr-md-1 rounded"><span class="ion-logo-facebook mr-2"></span> Create account ?</a>
-                        </div>
+                        @if (!string.IsNullOrEmpty(Context.Request.Query["change_account"]))
+                        {
+                            <div class="social d-flex text-center">
+                                <a href="@Url.Action("","register",new {change_account="true"})" class="px-2 py-2 mr-md-1 rounded"><span class="ion-logo-facebook mr-2"></span> Create account ?</a>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="social d-flex text-center">
+                                <a href="@Url.Action("","register")" class="px-2 py-2 mr-md-1 rounded"><span class="ion-logo-facebook mr-2"></span> Create account ?</a>
+                            </div>
+                        }
                     </div>
                 </div>
             </div>

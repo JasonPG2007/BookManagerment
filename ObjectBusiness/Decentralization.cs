@@ -18,6 +18,7 @@ namespace ObjectBusiness
         public int AccountId { get; set; }
         [Display(Name = "Role ID")]
         public int RoleId { get; set; }
+        public DateTime DateDecentralization { get; set; }
         [JsonIgnore]
         public virtual Account? Account { get; set; }
         [JsonIgnore]

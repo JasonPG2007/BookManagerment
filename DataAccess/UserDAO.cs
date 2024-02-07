@@ -30,6 +30,15 @@ namespace DataAccess
             }
         }
 
+        #region GetUsers function
+        public IEnumerable<User> GetUsers()
+        {
+            using var context = new BookContext();
+            var listUser = context.Users.ToList();
+            return listUser;
+        }
+        #endregion
+
         #region Login function
         public string Login(string userName, string password)
         {
@@ -61,8 +70,36 @@ namespace DataAccess
         }
         #endregion
 
+        #region Login function
+        public string GetUserName(string userName, string password)
+        {
+            using var context = new BookContext();
+            var user = context.Accounts.SingleOrDefault(a => a.UserName.Equals(userName) && a.Password.Equals(password));
+            if (user == null)
+            {
+                return "This account does not exist.";
+            }
+
+            // Join 2 table: Account, Users to get Full name
+            var getFullNameUser = from a in context.Accounts
+                                        join b in context.Users
+                                        on a.UserId equals b.UserId
+                                        where a.AccountId.Equals(user.AccountId)
+                                        select new User
+                                        {
+                                            FullName = b.FullName
+                                        };
+            var result = "";
+            foreach (var check in getFullNameUser)
+            {
+                result = check.FullName;
+            }
+            return result;
+        }
+        #endregion
+
         #region Register function
-        public void Register(string userName, string password, string phoneNumber, string city, string birthName, int age, string address, string email, string region, bool gender)
+        public string Register(string userName, string password, string phoneNumber, string city, string birthName, int age, string address, string email, string region, bool gender)
         {
             using var context = new BookContext();
             Random random = new Random();
@@ -81,6 +118,7 @@ namespace DataAccess
                 user.City = city;
                 user.Address = address;
                 user.Region = region;
+                user.DateRegister = DateTime.Now;
 
                 Account account = new Account();
                 account.AccountId = random.Next();
@@ -88,31 +126,39 @@ namespace DataAccess
                 account.Password = password;
                 account.Star = 0;
                 account.UserId = user.UserId;
+                account.DateCreated = DateTime.Now;
 
                 Decentralization decentralization = new Decentralization();
                 decentralization.DecentralizationId = random.Next();
                 decentralization.AccountId = account.AccountId;
                 decentralization.RoleId = 3;
+                decentralization.DateDecentralization = DateTime.Now;
 
                 context.Users.Add(user);
-                int isUserAdded = context.SaveChanges();
-                if (isUserAdded > 0)
+                if (context.Users.Local.Any(u => u.UserId == user.UserId))
                 {
-                    context.Accounts.Add(account);
-                    int isAccountAdded = context.SaveChanges();
-                    if (isAccountAdded > 0)
+                    var isUsernameExists = context.Accounts.Any(x => x.UserName.Equals(account.UserName));
+                    if (isUsernameExists)
                     {
-                        context.Decentralizations.Add(decentralization);
-                        context.SaveChanges();
+                        return message = "Username is already in use. Try another name.";
                     }
                     else
                     {
-                        message = "Adding account failed. Please try again.";
+                        context.Accounts.Add(account);
+                        if (context.Accounts.Local.Any(a => a.AccountId == account.AccountId))
+                        {
+                            context.Decentralizations.Add(decentralization);
+                            context.SaveChanges();
+                        }
+                        else
+                        {
+                            return message = "Adding account failed. Please try again.";
+                        }
                     }
                 }
                 else
                 {
-                    message = "User added failed so couldn't add account. Please try again.";
+                    return message = "User added failed so couldn't add account. Please try again.";
                 }
             }
             catch (DbUpdateException ex)
@@ -123,6 +169,7 @@ namespace DataAccess
             {
                 throw new Exception(ex.Message);
             }
+            return message;
         }
         #endregion
 

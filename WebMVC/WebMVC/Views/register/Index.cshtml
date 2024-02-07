@@ -31,6 +31,13 @@
         select option {
             color: black;
         }
+
+        .validation-summary-errors {
+            background-color: red;
+            color: white;
+            border-radius: 5px;
+            width: 100%;
+        }
     </style>
     <section class="ftco-section">
         <div class="container">
@@ -91,7 +98,14 @@
                         }
                         <p class="w-100 text-center">&mdash; Or &mdash;</p>
                         <div class="social d-flex text-center">
-                            <a href="@Url.Action("","login")" class="px-2 py-2 mr-md-1 rounded"><span class="ion-logo-facebook mr-2"></span> Login</a>
+                            @if (!string.IsNullOrEmpty(Context.Request.Query["change_account"]))
+                            {
+                                <a href="@Url.Action("","login",new {change_account="true"})" class="px-2 py-2 mr-md-1 rounded"><span class="ion-logo-facebook mr-2"></span> Login</a>
+                            }
+                            else
+                            {
+                                <a href="@Url.Action("","login")" class="px-2 py-2 mr-md-1 rounded"><span class="ion-logo-facebook mr-2"></span> Login</a>
+                            }
                         </div>
                     </div>
                 </div>

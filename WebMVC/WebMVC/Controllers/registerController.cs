@@ -13,8 +13,13 @@ namespace WebMVC.Controllers
             userRepository = new UserRepository();
         }
         // GET: registerController
-        public ActionResult Index()
+        public ActionResult Index(string change_account)
         {
+            if (change_account != null)
+            {
+                TempData["change_account"] = "true";
+                TempData.Keep();
+            }
             return View();
         }
 
@@ -36,8 +41,19 @@ namespace WebMVC.Controllers
                 }
                 if (model.ConfirmPassword.Equals(model.Password))
                 {
-                    userRepository.Register(model.UserName, model.Password, model.PhoneNumber, model.City, model.BirthName, model.Age, model.Address, model.Email, model.Region, genderAdd);
-                    return RedirectToAction("", "login");
+                    var isRegister = userRepository.Register(model.UserName, model.Password, model.PhoneNumber, model.City, model.BirthName, model.Age, model.Address, model.Email, model.Region, genderAdd);
+                    if (isRegister == "")
+                    {
+                        if (TempData["change_account"] != null)
+                        {
+                            return RedirectToAction("", "login", new { change_account = "true" });
+                        }
+                        return RedirectToAction("", "login");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", $"{isRegister}");
+                    }
                 }
                 else
                 {
