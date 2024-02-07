@@ -30,7 +30,7 @@
                     @if (!Context.Request.Cookies.ContainsKey("userName"))
                     {
                         <li class="nav-item submenu dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">System</a>
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i style="font-size:25px" class="fa-solid fa-circle-user"></i></a>
                             <ul class="dropdown-menu">
                                 @if (!Context.Request.Cookies.ContainsKey("userName"))
                                 {
@@ -54,7 +54,7 @@
                     @if (Context.Request.Cookies.ContainsKey("userName"))
                     {
                         <li class="nav-item submenu dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hello, @Context.Request.Cookies["userName"]</a>
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i style="font-size:25px" class="fa-solid fa-circle-user"></i></a>
                             <ul class="dropdown-menu">
                                 <li class="nav-item"><a class="nav-link" href="@Url.Action("","profile")">Profile</a></li>
                                 <li class="nav-item">
