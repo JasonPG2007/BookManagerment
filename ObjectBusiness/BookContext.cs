@@ -40,7 +40,10 @@ namespace ObjectBusiness
                     Email = "anonymous@gmail.com",
                     City = "Security",
                     Gender = true,
-                    PhoneNumber = "0911040107"
+                    PhoneNumber = "0911040107",
+                    DateRegister = new DateTime(2024, 2, 7),
+                    Age = 17,
+                    Picture = "avatar.jpg"
                 }
                 );
 

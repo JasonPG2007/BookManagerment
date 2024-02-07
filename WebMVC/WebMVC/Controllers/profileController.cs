@@ -7,8 +7,10 @@ namespace WebMVC.Controllers
     public class profileController : Controller
     {
         private readonly IAccountRepository accountRepository;
+        private readonly IUserRepository userRepository;
         public profileController()
         {
+            userRepository = new UserRepository();
             accountRepository = new AccountRepository();
         }
         // GET: profileController1

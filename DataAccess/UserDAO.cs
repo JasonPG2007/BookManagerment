@@ -13,6 +13,7 @@ namespace DataAccess
     /// </summary>
     public class UserDAO
     {
+        private readonly BookContext db;
         private static UserDAO instance = null;
         private static readonly object Lock = new object();
         public static UserDAO Instance
@@ -29,6 +30,40 @@ namespace DataAccess
                 }
             }
         }
+        public UserDAO()
+        {
+            db = new BookContext();
+        }
+
+        #region GetUserAndAccount function
+        public IEnumerable<Account> GetUserAndAccount(string username)
+        {
+            using var context = new BookContext();
+            var list = from a in db.Accounts
+                       join b in db.Users
+                       on a.UserId equals b.UserId
+                       where a.UserName == username
+                       select new Account
+                       {
+                           AccountId = a.AccountId,
+                           UserName = a.UserName,
+                           Password = a.Password,
+                           Star = a.Star,
+                           Point = a.Point,
+                           FullName = b.FullName,
+                           Age = b.Age,
+                           Address = b.Address,
+                           City = b.City,
+                           DateRegister = b.DateRegister,
+                           Email = b.Email,
+                           Gender = b.Gender,
+                           PhoneNumber = b.PhoneNumber,
+                           Picture = b.Picture,
+                           Region = b.Region
+                       };
+            return list;
+        }
+        #endregion
 
         #region GetUsers function
         public IEnumerable<User> GetUsers()
@@ -71,30 +106,21 @@ namespace DataAccess
         #endregion
 
         #region GetFullName function
-        public string GetFullName(string userName, string password)
+        public IEnumerable<User> GetFullName(string userName, string password)
         {
-            using var context = new BookContext();
-            var user = context.Accounts.SingleOrDefault(a => a.UserName.Equals(userName) && a.Password.Equals(password));
-            if (user == null)
-            {
-                return "This account does not exist.";
-            }
+            var user = db.Accounts.SingleOrDefault(a => a.UserName.Equals(userName) && a.Password.Equals(password));
 
             // Join 2 table: Account, Users to get Full name
-            var getFullNameUser = from a in context.Accounts
-                                        join b in context.Users
-                                        on a.UserId equals b.UserId
-                                        where a.AccountId.Equals(user.AccountId)
-                                        select new User
-                                        {
-                                            FullName = b.FullName
-                                        };
-            var result = "";
-            foreach (var check in getFullNameUser)
-            {
-                result = check.FullName;
-            }
-            return result;
+            var getFullNameUser = from a in db.Accounts
+                                  join b in db.Users
+                                  on a.UserId equals b.UserId
+                                  where a.AccountId.Equals(user.AccountId)
+                                  select new User
+                                  {
+                                      AccountId = a.AccountId,
+                                      FullName = b.FullName
+                                  };
+            return getFullNameUser;
         }
         #endregion
 

@@ -54,6 +54,9 @@ namespace ObjectBusiness.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<float>("Point")
+                        .HasColumnType("real");
+
                     b.Property<int>("Star")
                         .HasColumnType("int");
 
@@ -77,6 +80,7 @@ namespace ObjectBusiness.Migrations
                             AccountId = 92687906,
                             DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Password = "Admin@123.cntt",
+                            Point = 0f,
                             Star = 5,
                             UserId = 781404488,
                             UserName = "ADMIN"
@@ -268,13 +272,14 @@ namespace ObjectBusiness.Migrations
                         {
                             UserId = 781404488,
                             Address = "Anonymous",
-                            Age = 0,
+                            Age = 17,
                             City = "Security",
-                            DateRegister = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateRegister = new DateTime(2024, 2, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "anonymous@gmail.com",
                             FullName = "Anonymous",
                             Gender = true,
                             PhoneNumber = "0911040107",
+                            Picture = "avatar.jpg",
                             Region = "Security"
                         });
                 });

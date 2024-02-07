@@ -54,7 +54,11 @@ namespace WebMVC.Controllers
                             return Redirect("~/admin/manager");
                         case "User":
                             var getUserName = userRepository.GetFullName(userName, password);
-                            Response.Cookies.Append("userName", getUserName);
+                            foreach (var item in getUserName)
+                            {
+                                Response.Cookies.Append("userName", item.FullName);
+                                HttpContext.Session.SetString("idUser", item.AccountId.ToString());
+                            }
                             var claimsUser = new List<Claim>()
                     {
                         new Claim(ClaimTypes.Name, userName),
