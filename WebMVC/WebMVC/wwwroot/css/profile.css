@@ -1896,7 +1896,7 @@ textarea[resize='horizontal'] {
 @media (min-width: 768px) {
     .navbar .dropdown-menu {
         margin: 0;
-        pointer-events: none;
+        /*pointer-events: none;*/
         opacity: 0;
     }
 

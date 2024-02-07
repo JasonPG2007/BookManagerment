@@ -1,10 +1,16 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Repository;
 
 namespace WebMVC.Controllers
 {
     public class profileController : Controller
     {
+        private readonly IAccountRepository accountRepository;
+        public profileController()
+        {
+            accountRepository = new AccountRepository();
+        }
         // GET: profileController1
         public ActionResult Index()
         {
@@ -39,15 +45,20 @@ namespace WebMVC.Controllers
         }
 
         // GET: profileController1/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult edit(int id)
         {
-            return View();
+            var checkContains = accountRepository.GetAccountById(id);
+            if (checkContains != null)
+            {
+                return View(checkContains);
+            }
+            return View("error");
         }
 
         // POST: profileController1/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult edit(int id, IFormCollection collection)
         {
             try
             {
