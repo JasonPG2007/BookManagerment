@@ -27,30 +27,42 @@
                         </ul>
                     </li>
                     <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-                    <li class="nav-item submenu dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">System</a>
-                        <ul class="dropdown-menu">
-                            @if (!Context.Request.Cookies.ContainsKey("userName"))
-                            {
-                                <li class="nav-item"><a class="nav-link" href="@Url.Action("","login")">Login</a></li>
-                                <li class="nav-item"><a class="nav-link" href="@Url.Action("","register")">Register</a></li>
-                            }
-                            else
-                            {
-                                <li class="nav-item"><a class="nav-link" href="@Url.Action("logout","login")">Logout</a></li>
+                    @if (!Context.Request.Cookies.ContainsKey("userName"))
+                    {
+                        <li class="nav-item submenu dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">System</a>
+                            <ul class="dropdown-menu">
+                                @if (!Context.Request.Cookies.ContainsKey("userName"))
+                                {
+                                    <li class="nav-item"><a class="nav-link" href="@Url.Action("","login")">Login</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="@Url.Action("","register")">Register</a></li>
+                                }
+                                else
+                                {
+                                    <li class="nav-item"><a class="nav-link" href="@Url.Action("logout","login")">Logout</a></li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="@Url.Action("","login",new {change_account = "true"})">Change account</a>
+                                    </li>
+                                    if (cookies == "Admin")
+                                    {
+                                        <li class="nav-item"><a class="nav-link" href="~/admin/manager">Manager</a></li>
+                                    }
+                                }
+                            </ul>
+                        </li>
+                    }
+                    @if (Context.Request.Cookies.ContainsKey("userName"))
+                    {
+                        <li class="nav-item submenu dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hello, @Context.Request.Cookies["userName"]</a>
+                            <ul class="dropdown-menu">
+                                <li class="nav-item"><a class="nav-link" href="@Url.Action("","profile")">Profile</a></li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="@Url.Action("","login",new {change_account = "true"})">Change account</a>
                                 </li>
-                                if (cookies == "Admin")
-                                {
-                                    <li class="nav-item"><a class="nav-link" href="~/admin/manager">Manager</a></li>
-                                }
-                            }
-                        </ul>
-                    </li>
-                    @if (Context.Request.Cookies.ContainsKey("userName"))
-                    {
-                        <li class="nav-item"><a class="nav-link">Hello, @Context.Request.Cookies["userName"]</a></li>
+                                <li class="nav-item"><a class="nav-link" href="@Url.Action("logout","login")">Logout</a></li>
+                            </ul>
+                        </li>
                     }
                 </ul>
             </div>

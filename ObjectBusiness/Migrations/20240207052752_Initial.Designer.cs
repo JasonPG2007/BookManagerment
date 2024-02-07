@@ -12,7 +12,7 @@ using ObjectBusiness;
 namespace ObjectBusiness.Migrations
 {
     [DbContext(typeof(BookContext))]
-    [Migration("20240207023753_Initial")]
+    [Migration("20240207052752_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -253,6 +253,9 @@ namespace ObjectBusiness.Migrations
 
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Picture")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Region")

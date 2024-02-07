@@ -66,6 +66,7 @@ namespace ObjectBusiness.Migrations
                     City = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Region = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Gender = table.Column<bool>(type: "bit", nullable: false),
+                    Picture = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DateRegister = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
@@ -161,8 +162,8 @@ namespace ObjectBusiness.Migrations
 
             migrationBuilder.InsertData(
                 table: "Users",
-                columns: new[] { "UserId", "Address", "Age", "City", "DateRegister", "Email", "FullName", "Gender", "PhoneNumber", "Region" },
-                values: new object[] { 781404488, "Anonymous", 0, "Security", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "anonymous@gmail.com", "Anonymous", true, "0911040107", "Security" });
+                columns: new[] { "UserId", "Address", "Age", "City", "DateRegister", "Email", "FullName", "Gender", "PhoneNumber", "Picture", "Region" },
+                values: new object[] { 781404488, "Anonymous", 0, "Security", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "anonymous@gmail.com", "Anonymous", true, "0911040107", null, "Security" });
 
             migrationBuilder.InsertData(
                 table: "Accounts",
