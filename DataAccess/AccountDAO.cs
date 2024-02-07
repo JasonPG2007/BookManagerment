@@ -35,6 +35,28 @@ namespace DataAccess
         }
         #endregion
 
+        #region GetAccountByUserName function
+        public Account GetAccountByUserName(string username)
+        {
+            using var context = new BookContext();
+            var checkAccountContains = context.Accounts.FirstOrDefault(a => a.UserName == username);
+            return checkAccountContains;
+        }
+        #endregion
+
+        #region GetUserName function
+        public bool GetUserName(string userName)
+        {
+            using var context = new BookContext();
+            var user = context.Accounts.FirstOrDefault(a => a.UserName.Equals(userName));
+            if (user != null)
+            {
+                return true;
+            }
+            return false;
+        }
+        #endregion
+
         #region UpdateAccount function
         public void UpdateAccount(Account account)
         {
@@ -71,6 +93,36 @@ namespace DataAccess
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
+            }
+        }
+        #endregion
+
+        #region ResetPassword function
+        public bool ResetPassword(string userName, string newPassword)
+        {
+            using var context = new BookContext();
+            var checkAccountContains = GetAccountByUserName(userName);
+            int check = 0;
+            if (checkAccountContains != null)
+            {
+                checkAccountContains.Password = newPassword;
+                try
+                {
+                    context.Entry<Account>(checkAccountContains).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                    check = context.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
+            }
+            if (check > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
         #endregion

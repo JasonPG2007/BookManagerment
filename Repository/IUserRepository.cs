@@ -14,6 +14,6 @@ namespace Repository
         public void DeleteUser(int id);
         public string Register(string userName, string password, string phoneNumber, string city, string birthName, int age, string address, string email, string region, bool gender);
         public IEnumerable<User> GetUsers();
-        public string GetUserName(string userName, string password);
+        public string GetFullName(string userName, string password);
     }
 }

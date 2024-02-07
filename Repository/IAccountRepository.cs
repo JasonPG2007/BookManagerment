@@ -11,6 +11,9 @@ namespace Repository
     {
         public void UpdateAccount(Account account);
         public Account GetAccountById(int id);
+        public Account GetAccountByUserName(string username);
         public void DeleteAccount(int id);
+        public bool GetUserName(string userName);
+        public bool ResetPassword(string userName, string newPassword);
     }
 }

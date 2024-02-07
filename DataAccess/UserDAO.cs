@@ -70,8 +70,8 @@ namespace DataAccess
         }
         #endregion
 
-        #region Login function
-        public string GetUserName(string userName, string password)
+        #region GetFullName function
+        public string GetFullName(string userName, string password)
         {
             using var context = new BookContext();
             var user = context.Accounts.SingleOrDefault(a => a.UserName.Equals(userName) && a.Password.Equals(password));
