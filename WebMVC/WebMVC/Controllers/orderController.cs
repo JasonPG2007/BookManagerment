@@ -1,8 +1,11 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebMVC.Controllers
 {
+    [Authorize(Roles = "Admin, User, Staff")]
+    [Authorize(AuthenticationSchemes = "Admin, User, Staff")]
     public class orderController : Controller
     {
         // GET: orderController
