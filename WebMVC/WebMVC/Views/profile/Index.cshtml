@@ -19,7 +19,7 @@
                         <a href="@Url.Action("edit","profile",new{id=item.AccountId})" class="btn btn-info">Edit profile</a>
                         @if (TempData.Peek("message") != null)
                         {
-                            <h4 style="background-color:@TempData["bgcolor"];color:@TempData["color"];padding:10px;border-radius:10px;margin-top:2%">@TempData["message"]</h4>
+                            <h4 id="message" style="background-color:@TempData["bgcolor"];color:@TempData["color"];padding:10px;border-radius:10px;margin-top:2%">@TempData["message"]</h4>
                         }
                     </div>
                 </div>
@@ -68,7 +68,7 @@
                                     @item.FullName<span class="font-weight-light">, @item.Age</span>
                                 </h3>
                                 <div class="h5 font-weight-300">
-                                    @item.Address, @item.Region
+                                    @item.Address, @item.Region, @item.City
                                 </div>
                             </div>
                         </div>
@@ -173,3 +173,24 @@
         </div>
     </div>
 }
+<script>
+    function fadeOut(element, durationMs) {
+        var step = 16; // Thời gian giữa mỗi bước thay đổi
+        var opacity = 1;
+        var delta = step * (step / durationMs); // Độ chênh lệch dựa trên thời gian và thời gian giữa mỗi bước
+
+        var timer = setInterval(function () {
+            opacity -= delta; // Giảm opacity
+            if (opacity <= 0) { // Kiểm tra nếu opacity đã giảm đến 0
+                clearInterval(timer); // Dừng setInterval
+                element.style.display = 'none'; // Ẩn phần tử sau khi mờ hoàn thành
+            } else {
+                element.style.opacity = opacity; // Cập nhật giá trị opacity
+            }
+        }, step);
+    }
+
+    // Sử dụng hàm fadeOut
+    var messageElement = document.getElementById('message');
+    fadeOut(messageElement, 100000); // 5000 milliseconds (5 seconds)
+</script>

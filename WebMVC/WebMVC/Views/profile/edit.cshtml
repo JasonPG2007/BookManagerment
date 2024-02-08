@@ -100,7 +100,7 @@
                                     @Model.FullName<span class="font-weight-light">, @Model.Age</span>
                                 </h3>
                                 <div class="h5 font-weight-300">
-                                    <i class="ni location_pin mr-2"></i>@Model.Address
+                                    @Model.Address, @Model.Region, @Model.City
                                 </div>
                             </div>
                         </div>
@@ -179,17 +179,17 @@
                                         <div class="form-group focused">
                                             <label class="form-control-label">Gender</label>
                                             @* <select name="gender" class="form-control form-control-alternative">
-                                                @if (Model.Gender.Equals("Male"))
-                                                {
-                                                    <option value="true">Male</option>
-                                                    <option value="false">Female</option>
-                                                }
-                                                else
-                                                {
-                                                    <option value="false">Female</option>
-                                                    <option value="true">Male</option>
-                                                }
-                                            </select> *@
+                                        @if (Model.Gender.Equals("Male"))
+                                        {
+                                        <option value="true">Male</option>
+                                        <option value="false">Female</option>
+                                        }
+                                        else
+                                        {
+                                        <option value="false">Female</option>
+                                        <option value="true">Male</option>
+                                        }
+                                        </select> *@
                                             @Html.DropDownListFor(model => Model.Gender, listItemGender, "Select gender", new { @class = "form-control form-control-alternative" })
                                         </div>
                                     </div>
