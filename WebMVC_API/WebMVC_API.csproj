@@ -1730,7 +1730,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Common\Common.csproj" />
     <ProjectReference Include="..\ObjectBusiness\ObjectBusiness.csproj" />
     <ProjectReference Include="..\Repository\Repository.csproj" />
   </ItemGroup>
