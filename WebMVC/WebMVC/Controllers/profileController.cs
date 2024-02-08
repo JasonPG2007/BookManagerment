@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using ObjectBusiness;
 using Repository;
 
 namespace WebMVC.Controllers
@@ -72,7 +73,7 @@ namespace WebMVC.Controllers
         // POST: profileController1/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult edit(int id, IFormCollection collection)
+        public ActionResult edit(Account account)
         {
             try
             {

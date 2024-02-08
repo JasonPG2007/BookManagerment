@@ -43,7 +43,8 @@ namespace WebMVC.Controllers
                             foreach (var item in getUserNameAdmin)
                             {
                                 Response.Cookies.Append("userName", item.FullName);
-                                Response.Cookies.Append("idUser", item.AccountId.ToString());
+                                Response.Cookies.Append("idAccount", item.AccountId.ToString());
+                                Response.Cookies.Append("idUser", item.UserId.ToString());
                             }
                             var claims = new List<Claim>()
                     {
@@ -62,7 +63,8 @@ namespace WebMVC.Controllers
                             foreach (var item in getUserName)
                             {
                                 Response.Cookies.Append("userName", item.FullName);
-                                Response.Cookies.Append("idUser", item.AccountId.ToString());
+                                Response.Cookies.Append("idAccount", item.AccountId.ToString());
+                                Response.Cookies.Append("idUser", item.UserId.ToString());
                             }
                             var claimsUser = new List<Claim>()
                     {
@@ -81,7 +83,8 @@ namespace WebMVC.Controllers
                             foreach (var item in getUserName2)
                             {
                                 Response.Cookies.Append("userName", item.FullName);
-                                Response.Cookies.Append("idUser", item.AccountId.ToString());
+                                Response.Cookies.Append("idAccount", item.AccountId.ToString());
+                                Response.Cookies.Append("idUser", item.UserId.ToString());
                             }
                             var claimsStaff = new List<Claim>()
                     {
