@@ -14,14 +14,14 @@ namespace ObjectBusiness
         [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
         [Display(Name = "Event ID")]
         public int EventId { get; set; }
+        [Display(Name = "Category ID")]
+        public int CategoryId { get; set; }
         [Display(Name = "Account ID")]
         public int AccountId { get; set; }
         [Display(Name = "Event name")]
         public string EventName { get; set; }
         [Display(Name = "Event description")]
         public string EventDescription { get; set; }
-        [Display(Name = "Event type")]
-        public string EventType { get; set; }
         [Display(Name = "Content")]
         public string EventContent { get; set; }
         public string? Picture { get; set; }
@@ -31,5 +31,7 @@ namespace ObjectBusiness
         public DateTime DateCreated { get; set; }
         [JsonIgnore]
         public virtual Account? Account { get; set; }
+        [JsonIgnore]
+        public virtual EventCategory? Category { get; set; }
     }
 }

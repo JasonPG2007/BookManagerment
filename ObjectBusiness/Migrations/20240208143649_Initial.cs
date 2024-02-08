@@ -42,6 +42,20 @@ namespace ObjectBusiness.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "EventCategories",
+                columns: table => new
+                {
+                    CategoryId = table.Column<int>(type: "int", nullable: false),
+                    CategoryName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CategoryDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_EventCategories", x => x.CategoryId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Roles",
                 columns: table => new
                 {
@@ -126,6 +140,27 @@ namespace ObjectBusiness.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Comments",
+                columns: table => new
+                {
+                    CommentId = table.Column<int>(type: "int", nullable: false),
+                    AccountId = table.Column<int>(type: "int", nullable: false),
+                    Content = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Interact = table.Column<int>(type: "int", nullable: false),
+                    DateComment = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Comments", x => x.CommentId);
+                    table.ForeignKey(
+                        name: "FK_Comments_Accounts_AccountId",
+                        column: x => x.AccountId,
+                        principalTable: "Accounts",
+                        principalColumn: "AccountId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Decentralizations",
                 columns: table => new
                 {
@@ -156,10 +191,10 @@ namespace ObjectBusiness.Migrations
                 columns: table => new
                 {
                     EventId = table.Column<int>(type: "int", nullable: false),
+                    CategoryId = table.Column<int>(type: "int", nullable: false),
                     AccountId = table.Column<int>(type: "int", nullable: false),
                     EventName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     EventDescription = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    EventType = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     EventContent = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Picture = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     NumberOfParticipants = table.Column<int>(type: "int", nullable: false),
@@ -173,6 +208,12 @@ namespace ObjectBusiness.Migrations
                         column: x => x.AccountId,
                         principalTable: "Accounts",
                         principalColumn: "AccountId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Events_EventCategories_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "EventCategories",
+                        principalColumn: "CategoryId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -231,6 +272,11 @@ namespace ObjectBusiness.Migrations
                 column: "CategoryId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Comments_AccountId",
+                table: "Comments",
+                column: "AccountId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Decentralizations_AccountId",
                 table: "Decentralizations",
                 column: "AccountId",
@@ -245,6 +291,11 @@ namespace ObjectBusiness.Migrations
                 name: "IX_Events_AccountId",
                 table: "Events",
                 column: "AccountId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Events_CategoryId",
+                table: "Events",
+                column: "CategoryId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Feedbacks_AccountId",
@@ -262,6 +313,9 @@ namespace ObjectBusiness.Migrations
                 name: "Books");
 
             migrationBuilder.DropTable(
+                name: "Comments");
+
+            migrationBuilder.DropTable(
                 name: "Decentralizations");
 
             migrationBuilder.DropTable(
@@ -275,6 +329,9 @@ namespace ObjectBusiness.Migrations
 
             migrationBuilder.DropTable(
                 name: "Roles");
+
+            migrationBuilder.DropTable(
+                name: "EventCategories");
 
             migrationBuilder.DropTable(
                 name: "Accounts");

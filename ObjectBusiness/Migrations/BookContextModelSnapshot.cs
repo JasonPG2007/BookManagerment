@@ -158,6 +158,31 @@ namespace ObjectBusiness.Migrations
                     b.ToTable("CategoryBooks");
                 });
 
+            modelBuilder.Entity("ObjectBusiness.Comment", b =>
+                {
+                    b.Property<int>("CommentId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("AccountId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DateComment")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Interact")
+                        .HasColumnType("int");
+
+                    b.HasKey("CommentId");
+
+                    b.HasIndex("AccountId");
+
+                    b.ToTable("Comments");
+                });
+
             modelBuilder.Entity("ObjectBusiness.Decentralization", b =>
                 {
                     b.Property<int>("DecentralizationId")
@@ -199,6 +224,9 @@ namespace ObjectBusiness.Migrations
                     b.Property<int>("AccountId")
                         .HasColumnType("int");
 
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
 
@@ -214,10 +242,6 @@ namespace ObjectBusiness.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("EventType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("NumberOfParticipants")
                         .HasColumnType("int");
 
@@ -228,7 +252,29 @@ namespace ObjectBusiness.Migrations
 
                     b.HasIndex("AccountId");
 
+                    b.HasIndex("CategoryId");
+
                     b.ToTable("Events");
+                });
+
+            modelBuilder.Entity("ObjectBusiness.EventCategory", b =>
+                {
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CategoryDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CategoryName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("CategoryId");
+
+                    b.ToTable("EventCategories");
                 });
 
             modelBuilder.Entity("ObjectBusiness.Feedback", b =>
@@ -361,6 +407,17 @@ namespace ObjectBusiness.Migrations
                     b.Navigation("Category");
                 });
 
+            modelBuilder.Entity("ObjectBusiness.Comment", b =>
+                {
+                    b.HasOne("ObjectBusiness.Account", "Account")
+                        .WithMany()
+                        .HasForeignKey("AccountId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Account");
+                });
+
             modelBuilder.Entity("ObjectBusiness.Decentralization", b =>
                 {
                     b.HasOne("ObjectBusiness.Account", "Account")
@@ -388,7 +445,15 @@ namespace ObjectBusiness.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("ObjectBusiness.EventCategory", "Category")
+                        .WithMany("Events")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Account");
+
+                    b.Navigation("Category");
                 });
 
             modelBuilder.Entity("ObjectBusiness.Feedback", b =>
@@ -414,6 +479,11 @@ namespace ObjectBusiness.Migrations
             modelBuilder.Entity("ObjectBusiness.CategoryBook", b =>
                 {
                     b.Navigation("Books");
+                });
+
+            modelBuilder.Entity("ObjectBusiness.EventCategory", b =>
+                {
+                    b.Navigation("Events");
                 });
 
             modelBuilder.Entity("ObjectBusiness.Role", b =>
