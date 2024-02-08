@@ -12,7 +12,7 @@ using ObjectBusiness;
 namespace ObjectBusiness.Migrations
 {
     [DbContext(typeof(BookContext))]
-    [Migration("20240208023302_Initial")]
+    [Migration("20240208082046_Initial")]
     partial class Initial
     {
         /// <inheritdoc />

@@ -17,6 +17,10 @@
                         <h1 class="display-2 text-white">Hello @item.FullName</h1>
                         <p class="text-white mt-0 mb-5">This is your profile page. You can see the progress you've made with your work and manage your projects or assigned tasks</p>
                         <a href="@Url.Action("edit","profile",new{id=item.AccountId})" class="btn btn-info">Edit profile</a>
+                        @if (TempData.Peek("message") != null)
+                        {
+                            <h4 style="background-color:@TempData["bgcolor"];color:@TempData["color"];padding:10px;border-radius:10px;margin-top:2%">@TempData["message"]</h4>
+                        }
                     </div>
                 </div>
             </div>
@@ -64,7 +68,7 @@
                                     @item.FullName<span class="font-weight-light">, @item.Age</span>
                                 </h3>
                                 <div class="h5 font-weight-300">
-                                    <i class="ni location_pin mr-2"></i>@item.Address
+                                    @item.Address, @item.Region
                                 </div>
                             </div>
                         </div>

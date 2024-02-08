@@ -29,7 +29,7 @@ namespace WebMVC.Controllers
         {
             if (gender != null)
             {
-                bool genderAdd = true;
+                bool genderAdd = false;
                 switch (gender)
                 {
                     case "true":
@@ -59,10 +59,6 @@ namespace WebMVC.Controllers
                 {
                     ModelState.AddModelError("", "Confirm password does not match the above password.");
                 }
-            }
-            else
-            {
-                ModelState.AddModelError("", "Please select gender.");
             }
             return View();
         }

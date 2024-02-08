@@ -182,6 +182,8 @@ namespace WebMVC.Controllers
             await HttpContext.SignOutAsync("User");
             await HttpContext.SignOutAsync("Staff");
             Response.Cookies.Delete("userName");
+            Response.Cookies.Delete("idUser");
+            Response.Cookies.Delete("idAccount");
             return RedirectToAction("", "home");
         }
     }

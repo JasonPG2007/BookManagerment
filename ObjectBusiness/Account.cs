@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -30,6 +31,8 @@ namespace ObjectBusiness
         public virtual ICollection<Event>? Events { get; set; }
         [JsonIgnore]
         public virtual ICollection<Feedback>? Feedbacks { get; set; }
+        [NotMapped]
+        public IFormFile AvatarImages { get; set; }
 
         #region View Model
         [JsonIgnore]
@@ -58,7 +61,8 @@ namespace ObjectBusiness
         public string Region { get; set; }
         [JsonIgnore]
         [NotMapped]
-        public bool Gender { get; set; } // True is male and false is female[JsonIgnore]
+        public bool Gender { get; set; } // True is male and false is female
+        [JsonIgnore]
         [NotMapped]
         public string? Picture { get; set; }
         [JsonIgnore]

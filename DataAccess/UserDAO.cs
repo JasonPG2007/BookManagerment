@@ -117,6 +117,7 @@ namespace DataAccess
                                   where a.AccountId.Equals(user.AccountId)
                                   select new User
                                   {
+                                      UserId = b.UserId,
                                       AccountId = a.AccountId,
                                       FullName = b.FullName
                                   };
@@ -209,22 +210,32 @@ namespace DataAccess
         #endregion
 
         #region UpdateUser function
-        public void UpdateUser(User user)
+        public bool UpdateUser(User user)
         {
             using var context = new BookContext();
+            bool isSuccessfully = false;
             try
             {
                 var checkUserContains = GetUserById(user.UserId);
                 if (checkUserContains != null)
                 {
                     context.Entry<User>(user).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-                    context.SaveChanges();
+                    int isUserUpdated = context.SaveChanges();
+                    if (isUserUpdated > 0)
+                    {
+                        isSuccessfully = true;
+                    }
+                    else
+                    {
+                        isSuccessfully = false;
+                    }
                 }
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
+            return isSuccessfully;
         }
         #endregion
 

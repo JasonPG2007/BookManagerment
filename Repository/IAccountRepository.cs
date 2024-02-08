@@ -9,7 +9,7 @@ namespace Repository
 {
     public interface IAccountRepository
     {
-        public void UpdateAccount(Account account);
+        public bool UpdateAccount(Account account);
         public Account GetAccountById(int id);
         public Account GetAccountByUserName(string username);
         public void DeleteAccount(int id);

@@ -10,7 +10,7 @@ namespace Repository
 {
     public class AccountRepository : IAccountRepository
     {
-        public void UpdateAccount(Account account) => AccountDAO.Instance.UpdateAccount(account);
+        public bool UpdateAccount(Account account) => AccountDAO.Instance.UpdateAccount(account);
         public Account GetAccountById(int id) => AccountDAO.Instance.GetAccountById(id);
         public Account GetAccountByUserName(string username) => AccountDAO.Instance.GetAccountByUserName(username);
         public void DeleteAccount(int id) => AccountDAO.Instance.DeleteAccount(id);

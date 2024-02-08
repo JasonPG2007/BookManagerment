@@ -91,22 +91,32 @@ namespace DataAccess
         #endregion
 
         #region UpdateAccount function
-        public void UpdateAccount(Account account)
+        public bool UpdateAccount(Account account)
         {
             using var context = new BookContext();
+            bool isSuccessfully = false;
             try
             {
                 var checkAccountContains = GetAccountById(account.AccountId);
                 if (checkAccountContains != null)
                 {
                     context.Entry<Account>(account).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-                    context.SaveChanges();
+                    int isAccountUpdated = context.SaveChanges();
+                    if (isAccountUpdated > 0)
+                    {
+                        isSuccessfully = true;
+                    }
+                    else
+                    {
+                        isSuccessfully = false;
+                    }
                 }
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
+            return isSuccessfully;
         }
         #endregion
 

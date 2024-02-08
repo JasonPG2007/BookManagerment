@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -24,7 +25,7 @@ namespace ObjectBusiness
         public string PhoneNumber { get; set; }
         public string City { get; set; }
         public string Region { get; set; }
-        public bool Gender { get; set; } // True is male and false is female
+        public bool Gender { get; set; } // True is Male and false is Female
         public string? Picture { get; set; }
         public DateTime DateRegister { get; set; }
         [JsonIgnore]
@@ -32,5 +33,7 @@ namespace ObjectBusiness
         [NotMapped]
         [JsonIgnore]
         public int AccountId { get; set; }
+        [NotMapped]
+        public IFormFile AvatarImages { get; set; }
     }
 }
