@@ -44,7 +44,10 @@
                                         <a href="#">
                                             @if (item.Picture != null)
                                             {
-                                                <img src="~/image/@item.Picture" class="rounded-circle">
+                                                <input type="file" id="fileInput" />
+                                                <label style="cursor:pointer" for="fileInput" class="fileInputLabel rounded-circle">
+                                                    <img src="~/image/@item.Picture" class="fileIcon" />
+                                                </label>
                                             }
                                             else
                                             {
