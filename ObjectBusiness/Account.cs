@@ -27,6 +27,12 @@ namespace ObjectBusiness
         [JsonIgnore]
         public virtual User? User { get; set; }
         [JsonIgnore]
+        public virtual ICollection<Event>? Events { get; set; }
+        [JsonIgnore]
+        public virtual ICollection<Feedback>? Feedbacks { get; set; }
+
+        #region View Model
+        [JsonIgnore]
         [NotMapped]
         [Display(Name = "Full name")]
         public string FullName { get; set; }
@@ -58,5 +64,6 @@ namespace ObjectBusiness
         [JsonIgnore]
         [NotMapped]
         public DateTime DateRegister { get; set; }
+        #endregion
     }
 }

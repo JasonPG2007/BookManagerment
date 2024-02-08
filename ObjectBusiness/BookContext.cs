@@ -12,6 +12,8 @@ namespace ObjectBusiness
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<Account> Accounts { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Event> Events { get; set; }
+        public virtual DbSet<Feedback> Feedbacks { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             var builder = new ConfigurationBuilder()

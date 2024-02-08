@@ -12,7 +12,7 @@ using ObjectBusiness;
 namespace ObjectBusiness.Migrations
 {
     [DbContext(typeof(BookContext))]
-    [Migration("20240207115914_Initial")]
+    [Migration("20240208023302_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -194,6 +194,61 @@ namespace ObjectBusiness.Migrations
                         });
                 });
 
+            modelBuilder.Entity("ObjectBusiness.Event", b =>
+                {
+                    b.Property<int>("EventId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("AccountId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("EventContent")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EventDescription")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EventName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EventType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("NumberOfParticipants")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Picture")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("EventId");
+
+                    b.HasIndex("AccountId");
+
+                    b.ToTable("Events");
+                });
+
+            modelBuilder.Entity("ObjectBusiness.Feedback", b =>
+                {
+                    b.Property<int>("FeedbackId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("AccountId")
+                        .HasColumnType("int");
+
+                    b.HasKey("FeedbackId");
+
+                    b.HasIndex("AccountId");
+
+                    b.ToTable("Feedbacks");
+                });
+
             modelBuilder.Entity("ObjectBusiness.Role", b =>
                 {
                     b.Property<int>("RoleId")
@@ -328,9 +383,35 @@ namespace ObjectBusiness.Migrations
                     b.Navigation("Role");
                 });
 
+            modelBuilder.Entity("ObjectBusiness.Event", b =>
+                {
+                    b.HasOne("ObjectBusiness.Account", "Account")
+                        .WithMany("Events")
+                        .HasForeignKey("AccountId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Account");
+                });
+
+            modelBuilder.Entity("ObjectBusiness.Feedback", b =>
+                {
+                    b.HasOne("ObjectBusiness.Account", "Account")
+                        .WithMany("Feedbacks")
+                        .HasForeignKey("AccountId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Account");
+                });
+
             modelBuilder.Entity("ObjectBusiness.Account", b =>
                 {
                     b.Navigation("Decentralization");
+
+                    b.Navigation("Events");
+
+                    b.Navigation("Feedbacks");
                 });
 
             modelBuilder.Entity("ObjectBusiness.CategoryBook", b =>
