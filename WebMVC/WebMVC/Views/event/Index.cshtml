@@ -360,7 +360,7 @@
                     @foreach (var item in Model)
                     {
                         <div class="col-lg-4 col-md-6">
-                            <a href="" style="color:black">
+                            <a href="@Url.Action("details","event",new {id=item.EventId})" style="color:black">
                                 <div class="single-schedules-inner">
                                     <div class="date">
                                         <i class="fa fa-clock-o"></i>

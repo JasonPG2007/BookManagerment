@@ -24,7 +24,7 @@ namespace WebMVC.Controllers
         }
 
         // GET: eventController/Details/5
-        public ActionResult Details(int id)
+        public ActionResult details(int id)
         {
             return View();
         }
