@@ -40,11 +40,16 @@ namespace ObjectBusiness
         [NotMapped]
         public string Content { get; set; }
         [Display(Name = "Account ID")]
+        [NotMapped]
         public int AccountId { get; set; }
+        [NotMapped]
         [Display(Name = "User name")]
         public string UserName { get; set; }
+        [NotMapped]
         public string Address { get; set; }
+        [NotMapped]
         public string City { get; set; }
+        [NotMapped]
         public string Region { get; set; }
         #endregion
     }
