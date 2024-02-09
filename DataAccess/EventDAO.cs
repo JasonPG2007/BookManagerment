@@ -32,8 +32,51 @@ namespace DataAccess
         }
         public IEnumerable<Event> GetEvents()
         {
-            using var context = new BookContext();
-            var list = context.Events.ToList();
+            var list = from a in db.Events
+                       join b in db.Decentralizations
+                       on a.DecentralizationId equals b.DecentralizationId
+                       join c in db.Accounts
+                       on b.AccountId equals c.AccountId
+                       join d in db.Users
+                       on c.UserId equals d.UserId
+                       select new Event
+                       {
+                           AccountId = c.AccountId,
+                           EventId = a.EventId,
+                           CategoryId = a.CategoryId,
+                           DateCreated = a.DateCreated,
+                           EventContent = a.EventContent,
+                           EventDescription = a.EventDescription,
+                           EventName = a.EventName,
+                           NumberOfParticipants = a.NumberOfParticipants,
+                           Picture = a.Picture,
+                           UserName = c.UserName,
+                           Address = d.Address,
+                           Region = d.Region,
+                           City = d.City,
+                       };
+            return list;
+        }
+        public IEnumerable<EventViewModel> GetEventAndAccount()
+        {
+            var list = from a in db.Events
+                       join b in db.Decentralizations
+                       on a.DecentralizationId equals b.DecentralizationId
+                       join c in db.Accounts
+                       on b.AccountId equals c.AccountId
+                       select new EventViewModel
+                       {
+                           AccountId = b.AccountId,
+                           EventId = a.EventId,
+                           CategoryId = a.CategoryId,
+                           DateCreated = a.DateCreated,
+                           EventContent = a.EventContent,
+                           EventDescription = a.EventDescription,
+                           EventName = a.EventName,
+                           NumberOfParticipants = a.NumberOfParticipants,
+                           Picture = a.Picture,
+                           UserName = b.UserName
+                       };
             return list;
         }
         public Event GetEventById(int id)

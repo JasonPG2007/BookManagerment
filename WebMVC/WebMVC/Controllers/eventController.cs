@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Repository;
+using X.PagedList;
 
 namespace WebMVC.Controllers
 {
@@ -13,9 +14,9 @@ namespace WebMVC.Controllers
             eventRepository = new EventRepository();
         }
         // GET: eventController
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
-            var listEvent = eventRepository.GetEvents();
+            var listEvent = eventRepository.GetEvents().ToPagedList(page ?? 1, 10);
             if (listEvent.Count() == 0)
             {
                 TempData["messageEvent"] = "No events have taken place yet.";
@@ -26,7 +27,16 @@ namespace WebMVC.Controllers
         // GET: eventController/Details/5
         public ActionResult details(int id)
         {
-            return View();
+            if (HttpContext.Session.GetString("commentStatus") != null)
+            {
+                TempData["commentStatus"] = HttpContext.Session.GetString("commentStatus");
+            }
+            var events = eventRepository.GetEventById(id);
+            if (events != null)
+            {
+                return View(events);
+            }
+            return View("error");
         }
 
         // GET: eventController/Create

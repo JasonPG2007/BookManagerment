@@ -10,5 +10,7 @@ namespace Repository
     public interface IEventRepository
     {
         public IEnumerable<Event> GetEvents();
+        public IEnumerable<EventViewModel> GetEventAndAccount();
+        public Event GetEventById(int id);
     }
 }

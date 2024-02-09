@@ -11,5 +11,7 @@ namespace Repository
     public class EventRepository : IEventRepository
     {
         public IEnumerable<Event> GetEvents() => EventDAO.Instance.GetEvents();
+        public IEnumerable<EventViewModel> GetEventAndAccount() => EventDAO.Instance.GetEventAndAccount();
+        public Event GetEventById(int id) => EventDAO.Instance.GetEventById(id);
     }
 }

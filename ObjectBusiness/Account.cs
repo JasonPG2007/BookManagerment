@@ -28,7 +28,7 @@ namespace ObjectBusiness
         [JsonIgnore]
         public virtual User? User { get; set; }
         [JsonIgnore]
-        public virtual ICollection<Event>? Events { get; set; }
+        public virtual ICollection<RegisterJoinEvent>? RegisterJoinEvents { get; set; }
         [JsonIgnore]
         public virtual ICollection<Feedback>? Feedbacks { get; set; }
         [NotMapped]

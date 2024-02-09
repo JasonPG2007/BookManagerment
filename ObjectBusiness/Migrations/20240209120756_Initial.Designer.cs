@@ -12,7 +12,7 @@ using ObjectBusiness;
 namespace ObjectBusiness.Migrations
 {
     [DbContext(typeof(BookContext))]
-    [Migration("20240208143649_Initial")]
+    [Migration("20240209120756_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -224,14 +224,14 @@ namespace ObjectBusiness.Migrations
                     b.Property<int>("EventId")
                         .HasColumnType("int");
 
-                    b.Property<int>("AccountId")
-                        .HasColumnType("int");
-
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("DecentralizationId")
+                        .HasColumnType("int");
 
                     b.Property<string>("EventContent")
                         .IsRequired()
@@ -253,9 +253,9 @@ namespace ObjectBusiness.Migrations
 
                     b.HasKey("EventId");
 
-                    b.HasIndex("AccountId");
-
                     b.HasIndex("CategoryId");
+
+                    b.HasIndex("DecentralizationId");
 
                     b.ToTable("Events");
                 });
@@ -293,6 +293,26 @@ namespace ObjectBusiness.Migrations
                     b.HasIndex("AccountId");
 
                     b.ToTable("Feedbacks");
+                });
+
+            modelBuilder.Entity("ObjectBusiness.RegisterJoinEvent", b =>
+                {
+                    b.Property<int>("RegisterId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("AccountId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("EventId")
+                        .HasColumnType("int");
+
+                    b.HasKey("RegisterId");
+
+                    b.HasIndex("AccountId");
+
+                    b.HasIndex("EventId");
+
+                    b.ToTable("RegisterJoinEvents");
                 });
 
             modelBuilder.Entity("ObjectBusiness.Role", b =>
@@ -442,21 +462,21 @@ namespace ObjectBusiness.Migrations
 
             modelBuilder.Entity("ObjectBusiness.Event", b =>
                 {
-                    b.HasOne("ObjectBusiness.Account", "Account")
-                        .WithMany("Events")
-                        .HasForeignKey("AccountId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("ObjectBusiness.EventCategory", "Category")
                         .WithMany("Events")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Account");
+                    b.HasOne("ObjectBusiness.Decentralization", "Decentralization")
+                        .WithMany("Events")
+                        .HasForeignKey("DecentralizationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Category");
+
+                    b.Navigation("Decentralization");
                 });
 
             modelBuilder.Entity("ObjectBusiness.Feedback", b =>
@@ -470,18 +490,43 @@ namespace ObjectBusiness.Migrations
                     b.Navigation("Account");
                 });
 
+            modelBuilder.Entity("ObjectBusiness.RegisterJoinEvent", b =>
+                {
+                    b.HasOne("ObjectBusiness.Account", "Account")
+                        .WithMany("RegisterJoinEvents")
+                        .HasForeignKey("AccountId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ObjectBusiness.Event", null)
+                        .WithMany("RegisterJoinEvents")
+                        .HasForeignKey("EventId");
+
+                    b.Navigation("Account");
+                });
+
             modelBuilder.Entity("ObjectBusiness.Account", b =>
                 {
                     b.Navigation("Decentralization");
 
-                    b.Navigation("Events");
-
                     b.Navigation("Feedbacks");
+
+                    b.Navigation("RegisterJoinEvents");
                 });
 
             modelBuilder.Entity("ObjectBusiness.CategoryBook", b =>
                 {
                     b.Navigation("Books");
+                });
+
+            modelBuilder.Entity("ObjectBusiness.Decentralization", b =>
+                {
+                    b.Navigation("Events");
+                });
+
+            modelBuilder.Entity("ObjectBusiness.Event", b =>
+                {
+                    b.Navigation("RegisterJoinEvents");
                 });
 
             modelBuilder.Entity("ObjectBusiness.EventCategory", b =>

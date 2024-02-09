@@ -27,5 +27,7 @@ namespace ObjectBusiness
         public string RoleName { get; set; }
         [NotMapped]
         public string UserName { get; set; }
+        [JsonIgnore]
+        public virtual ICollection<Event>? Events { get; set; }
     }
 }

@@ -1,4 +1,7 @@
-﻿@model IEnumerable<ObjectBusiness.Event>
+﻿@using X.PagedList
+@using X.PagedList.Mvc.Core
+@using X.PagedList.Web.Common
+@model IEnumerable<ObjectBusiness.Event>
 @{
     ViewData["Title"] = "Event";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -373,8 +376,8 @@
                                             <img src="~/image/icon_user.png" alt="img">
                                         </div>
                                         <div class="media-body align-self-center">
-                                            <h6>Dr. Ariful Islam Abid</h6>
-                                            <p>Ceo of AIA software agency, USA.</p>
+                                            <h6>@item.UserName</h6>
+                                            <p>@item.Address, @item.City, @item.Region</p>
                                         </div>
                                     </div>
                                 </div>
@@ -382,6 +385,20 @@
                         </div>
                     }
                 </div>
+                @if (TempData.Peek("messageEvent") == null)
+                {
+                    @Html.PagedListPager((IPagedList)Model,
+                             page =>
+                             {
+                                 var queryString = Context.Request.QueryString.ToString();
+                                 return $"?page={page}";
+                             },
+                             new PagedListRenderOptions
+                {
+                    LiElementClasses = new string[] { "page-item" },
+                    PageClasses = new string[] { "page-link" },
+                })
+                }
             </div>
         </div>
     </div>
