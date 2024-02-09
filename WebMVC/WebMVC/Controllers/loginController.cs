@@ -42,7 +42,7 @@ namespace WebMVC.Controllers
                             var getUserNameAdmin = userRepository.GetFullName(userName, password);
                             foreach (var item in getUserNameAdmin)
                             {
-                                Response.Cookies.Append("userName", item.FullName);
+                                Response.Cookies.Append("userName", "Admin");
                                 Response.Cookies.Append("idAccount", item.AccountId.ToString());
                                 Response.Cookies.Append("idUser", item.UserId.ToString());
                             }
