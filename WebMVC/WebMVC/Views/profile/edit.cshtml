@@ -22,9 +22,9 @@
     };
 }
 <style>
-    input[type="file"] {
-        display: none
-    }
+    /*   input[type="file"] {
+                    display: none
+                } */
 </style>
 @using (Html.BeginForm("edit", "profile", FormMethod.Post, new { @enctype = "multipart/form-data" }))
 {
@@ -62,17 +62,17 @@
                                     <a href="#">
                                         @if (Model.Picture != null)
                                         {
-                                            <input type="file" id="fileInput" />
                                             <label style="cursor:pointer" for="fileInput" class="fileInputLabel rounded-circle">
-                                                <img src="~/image/@Model.Picture" class="fileIcon" />
+                                                <img id="preview" src="~/upload/images/@Model.Picture" class="fileIcon" />
                                             </label>
+                                            @Html.EditorFor(model => model.AvatarImages, new { htmlAttributes = new { @class = "custom-file mt-3 mb-3" } })
                                         }
                                         else
                                         {
-                                            <input type="file" id="fileInput" />
                                             <label style="cursor:pointer" for="fileInput" class="fileInputLabel rounded-circle">
-                                                <img src="~/image/icon_user.png" class="fileIcon" />
+                                                <img id="preview" src="~/upload/images/icon_user.png" class="fileIcon" />
                                             </label>
+                                            @Html.EditorFor(model => model.AvatarImages, new { htmlAttributes = new { @class = "custom-file mt-3 mb-3" } })
                                         }
                                     </a>
                                 </div>
@@ -208,3 +208,19 @@
         </div>
     </div>
 }
+<script>
+
+
+    AvatarImages.onchange = evt => {
+
+        const [file] = AvatarImages.files
+
+        if (file) {
+
+            preview.src = URL.createObjectURL(file);
+
+
+        }
+
+    }
+</script>

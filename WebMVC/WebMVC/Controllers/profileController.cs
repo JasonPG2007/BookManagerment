@@ -76,7 +76,7 @@ namespace WebMVC.Controllers
         // POST: profileController1/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult edit(Account account, IFormFile file)
+        public ActionResult edit(Account account)
         {
             try
             {
@@ -86,9 +86,9 @@ namespace WebMVC.Controllers
                 User user = new User();
                 user.UserId = userId;
                 user.Email = account.Email;
-                if (file != null && file.Length > 0)
+                if (account.AvatarImages != null)
                 {
-                    user.Picture = UploadedAvatar(file);
+                    user.Picture = UploadedAvatar(account);
                 }
                 user.PhoneNumber = account.PhoneNumber;
                 user.Address = account.Address;
@@ -154,19 +154,22 @@ namespace WebMVC.Controllers
         }
 
         #region UploadedAvatar
-        private string UploadedAvatar(IFormFile file)
+        private string UploadedAvatar(Account account)
         {
-            string uploadsFolder = Path.Combine(webHostEnvironment.WebRootPath, "Uploads/images");
-
-            // Tạo một tên tệp duy nhất để ngăn việc ghi đè các tệp có cùng tên
-            string uniqueFileName = Guid.NewGuid().ToString() + "_" + file.FileName;
-
-            string filePath = Path.Combine(uploadsFolder, uniqueFileName);
-            using (var fileStream = new FileStream(filePath, FileMode.Create))
+            //string uniqueFileName = UploadedFile(hh);
+            //Save image to wwwroot/image
+            string wwwRootPath = webHostEnvironment.WebRootPath;
+            string fileName = Path.GetFileNameWithoutExtension(account.AvatarImages.FileName);
+            string extension = Path.GetExtension(account.AvatarImages.FileName);
+            //files.NameFile = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+            account.Picture = fileName = fileName + extension;
+            string path = Path.Combine(wwwRootPath + "/Upload/Images/", fileName);
+            using (var fileStream = new FileStream(path, FileMode.Create))
             {
-                file.CopyTo(fileStream);
+                account.AvatarImages.CopyTo(fileStream);
             }
-            return uniqueFileName;
+            ViewBag.Images = account.AvatarImages;
+            return fileName;
         }
         #endregion
 
