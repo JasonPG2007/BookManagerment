@@ -54,6 +54,7 @@ namespace DataAccess
                            Address = d.Address,
                            Region = d.Region,
                            City = d.City,
+                           Avatar = d.Picture
                        };
             return list;
         }

@@ -38,6 +38,8 @@ namespace ObjectBusiness
 
         #region View Model
         [NotMapped]
+        public string Avatar { get; set; }
+        [NotMapped]
         public string Content { get; set; }
         [NotMapped]
         [Display(Name = "User name")]
