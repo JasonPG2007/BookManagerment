@@ -16,8 +16,8 @@ namespace ObjectBusiness
         public int EventId { get; set; }
         [Display(Name = "Category ID")]
         public int CategoryId { get; set; }
-        [Display(Name = "Decentralization ID")]
-        public int DecentralizationId { get; set; }
+        [Display(Name = "Account ID")]
+        public int AccountId { get; set; }
         [Display(Name = "Event name")]
         public string EventName { get; set; }
         [Display(Name = "Event description")]
@@ -30,18 +30,15 @@ namespace ObjectBusiness
         [Display(Name = "Date created")]
         public DateTime DateCreated { get; set; }
         [JsonIgnore]
-        public virtual Decentralization? Decentralization { get; set; }
+        public virtual Account? Account { get; set; }
         [JsonIgnore]
         public virtual EventCategory? Category { get; set; }
-        [JsonIgnore]
-        public virtual ICollection<RegisterJoinEvent>? RegisterJoinEvents { get; set; }
+        //[JsonIgnore]
+        //public virtual ICollection<RegisterJoinEvent>? RegisterJoinEvents { get; set; }
 
         #region View Model
         [NotMapped]
         public string Content { get; set; }
-        [Display(Name = "Account ID")]
-        [NotMapped]
-        public int AccountId { get; set; }
         [NotMapped]
         [Display(Name = "User name")]
         public string UserName { get; set; }

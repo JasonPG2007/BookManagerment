@@ -13,9 +13,13 @@ namespace ObjectBusiness
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int RegisterId { get; set; }
-        [Display(Name = "Account ID")]
-        public int AccountId { get; set; }
-        [JsonIgnore]
-        public Account? Account { get; set; }
+        //[Display(Name = "Event ID")]
+        //public int EventId { get; set; }
+        //[Display(Name = "Account ID")]
+        //public int AccountId { get; set; }
+        //[JsonIgnore]
+        //public virtual Account? Account { get; set; }
+        //[JsonIgnore]
+        //public virtual Event? Event { get; set; }
     }
 }

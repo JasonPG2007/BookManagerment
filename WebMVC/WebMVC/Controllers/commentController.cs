@@ -31,7 +31,7 @@ namespace WebMVC.Controllers
             comment.Content = events.Content;
             comment.CommentId = random.Next();
             comment.DateComment = DateTime.Now;
-            comment.AccountId = idAccount;
+            comment.EventId = idAccount;
 
             Account account = new Account();
             var getAccount = accountRepository.GetAccountById(idAccount);

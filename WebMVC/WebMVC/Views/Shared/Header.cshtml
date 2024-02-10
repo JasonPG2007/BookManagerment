@@ -46,7 +46,7 @@
                         <li class="nav-item submenu dropdown">
                             @foreach (var item in getUserInformation)
                             {
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="~/upload/images/@item.Picture" width="25" height="25" style="object-fit:cover;border-radius: 50%;" /></a>
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="~/upload/images/@item.Picture" width="25" height="25" style="object-fit:cover;border-radius: 50%;" alt="avatar"/></a>
                             }
                             <ul class="dropdown-menu">
                                 <li class="nav-item"><a class="nav-link" href="@Url.Action("","profile",new{id=Context.Request.Cookies["idAccount"]})">Profile</a></li>

@@ -139,7 +139,7 @@
             <div class="panel-body">
                 @if (Context.Request.Cookies.ContainsKey("idAccount"))
                 {
-                    @using (Html.BeginForm("", "comment", FormMethod.Post))
+                    @using (Html.BeginForm("comment", "event", FormMethod.Post))
                     {
                         @if (TempData.Peek("commentStatus") != null)
                         {

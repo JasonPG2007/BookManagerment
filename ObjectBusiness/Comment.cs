@@ -14,20 +14,23 @@ namespace ObjectBusiness
         [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
         [Display(Name = "Comment ID")]
         public int CommentId { get; set; }
-        [Display(Name = "Account ID")]
-        public int AccountId { get; set; }
+        [Display(Name = "Event ID")]
+        public int EventId { get; set; }
         public string Content { get; set; }
         public int Interact { get; set; } = 0;
         [Display(Name = "Date comment")]
         public DateTime DateComment { get; set; }
         [JsonIgnore]
-        public virtual Account? Account { get; set; }
+        public virtual Event? Event { get; set; }
 
         #region View Model
         [NotMapped]
         public string UserName { get; set; }
         [NotMapped]
         public string Picture { get; set; }
+        [NotMapped]
+        [Display(Name = "Account ID")]
+        public int AccountId { get; set; }
         #endregion
     }
 }

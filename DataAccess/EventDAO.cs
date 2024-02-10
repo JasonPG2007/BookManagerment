@@ -33,8 +33,8 @@ namespace DataAccess
         public IEnumerable<Event> GetEvents()
         {
             var list = from a in db.Events
-                       join b in db.Decentralizations
-                       on a.DecentralizationId equals b.DecentralizationId
+                       join b in db.Accounts
+                       on a.AccountId equals b.AccountId
                        join c in db.Accounts
                        on b.AccountId equals c.AccountId
                        join d in db.Users
@@ -60,8 +60,8 @@ namespace DataAccess
         public IEnumerable<EventViewModel> GetEventAndAccount()
         {
             var list = from a in db.Events
-                       join b in db.Decentralizations
-                       on a.DecentralizationId equals b.DecentralizationId
+                       join b in db.Accounts
+                       on a.AccountId equals b.AccountId
                        join c in db.Accounts
                        on b.AccountId equals c.AccountId
                        select new EventViewModel

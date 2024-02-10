@@ -45,24 +45,22 @@ namespace DataAccess
         public IEnumerable<Comment> GetCommentByEventId(int id)
         {
             var comment = from a in db.Comments
-                          join b in db.Accounts
-                          on a.AccountId equals b.AccountId
-                          join c in db.Decentralizations
+                          join b in db.Events
+                          on a.EventId equals b.EventId
+                          join c in db.Accounts
                           on b.AccountId equals c.AccountId
-                          join d in db.Events
-                          on c.DecentralizationId equals d.DecentralizationId
-                          join e in db.Users
-                          on b.UserId equals e.UserId
-                          where d.EventId == id
+                          join d in db.Users
+                          on c.UserId equals d.UserId
+                          where b.EventId == id
                           select new Comment
                           {
                               Content = a.Content,
                               DateComment = a.DateComment,
-                              AccountId = b.AccountId,
+                              AccountId = c.AccountId,
                               CommentId = a.CommentId,
                               Interact = a.Interact,
-                              UserName = b.UserName,
-                              Picture = e.Picture
+                              UserName = c.UserName,
+                              Picture = d.Picture
                           };
             return comment;
         }

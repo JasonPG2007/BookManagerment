@@ -56,6 +56,17 @@ namespace ObjectBusiness.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "RegisterJoinEvents",
+                columns: table => new
+                {
+                    RegisterId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RegisterJoinEvents", x => x.RegisterId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Roles",
                 columns: table => new
                 {
@@ -140,27 +151,6 @@ namespace ObjectBusiness.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Comments",
-                columns: table => new
-                {
-                    CommentId = table.Column<int>(type: "int", nullable: false),
-                    AccountId = table.Column<int>(type: "int", nullable: false),
-                    Content = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Interact = table.Column<int>(type: "int", nullable: false),
-                    DateComment = table.Column<DateTime>(type: "datetime2", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Comments", x => x.CommentId);
-                    table.ForeignKey(
-                        name: "FK_Comments_Accounts_AccountId",
-                        column: x => x.AccountId,
-                        principalTable: "Accounts",
-                        principalColumn: "AccountId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Decentralizations",
                 columns: table => new
                 {
@@ -187,6 +177,37 @@ namespace ObjectBusiness.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Events",
+                columns: table => new
+                {
+                    EventId = table.Column<int>(type: "int", nullable: false),
+                    CategoryId = table.Column<int>(type: "int", nullable: false),
+                    AccountId = table.Column<int>(type: "int", nullable: false),
+                    EventName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    EventDescription = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    EventContent = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Picture = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NumberOfParticipants = table.Column<int>(type: "int", nullable: false),
+                    DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Events", x => x.EventId);
+                    table.ForeignKey(
+                        name: "FK_Events_Accounts_AccountId",
+                        column: x => x.AccountId,
+                        principalTable: "Accounts",
+                        principalColumn: "AccountId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Events_EventCategories_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "EventCategories",
+                        principalColumn: "CategoryId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Feedbacks",
                 columns: table => new
                 {
@@ -205,58 +226,24 @@ namespace ObjectBusiness.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Events",
+                name: "Comments",
                 columns: table => new
                 {
+                    CommentId = table.Column<int>(type: "int", nullable: false),
                     EventId = table.Column<int>(type: "int", nullable: false),
-                    CategoryId = table.Column<int>(type: "int", nullable: false),
-                    DecentralizationId = table.Column<int>(type: "int", nullable: false),
-                    EventName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    EventDescription = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    EventContent = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Picture = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    NumberOfParticipants = table.Column<int>(type: "int", nullable: false),
-                    DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    Content = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Interact = table.Column<int>(type: "int", nullable: false),
+                    DateComment = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Events", x => x.EventId);
+                    table.PrimaryKey("PK_Comments", x => x.CommentId);
                     table.ForeignKey(
-                        name: "FK_Events_Decentralizations_DecentralizationId",
-                        column: x => x.DecentralizationId,
-                        principalTable: "Decentralizations",
-                        principalColumn: "DecentralizationId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Events_EventCategories_CategoryId",
-                        column: x => x.CategoryId,
-                        principalTable: "EventCategories",
-                        principalColumn: "CategoryId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "RegisterJoinEvents",
-                columns: table => new
-                {
-                    RegisterId = table.Column<int>(type: "int", nullable: false),
-                    AccountId = table.Column<int>(type: "int", nullable: false),
-                    EventId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_RegisterJoinEvents", x => x.RegisterId);
-                    table.ForeignKey(
-                        name: "FK_RegisterJoinEvents_Accounts_AccountId",
-                        column: x => x.AccountId,
-                        principalTable: "Accounts",
-                        principalColumn: "AccountId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_RegisterJoinEvents_Events_EventId",
+                        name: "FK_Comments_Events_EventId",
                         column: x => x.EventId,
                         principalTable: "Events",
-                        principalColumn: "EventId");
+                        principalColumn: "EventId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(
@@ -296,9 +283,9 @@ namespace ObjectBusiness.Migrations
                 column: "CategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Comments_AccountId",
+                name: "IX_Comments_EventId",
                 table: "Comments",
-                column: "AccountId");
+                column: "EventId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Decentralizations_AccountId",
@@ -312,29 +299,19 @@ namespace ObjectBusiness.Migrations
                 column: "RoleId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Events_AccountId",
+                table: "Events",
+                column: "AccountId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Events_CategoryId",
                 table: "Events",
                 column: "CategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Events_DecentralizationId",
-                table: "Events",
-                column: "DecentralizationId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Feedbacks_AccountId",
                 table: "Feedbacks",
                 column: "AccountId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_RegisterJoinEvents_AccountId",
-                table: "RegisterJoinEvents",
-                column: "AccountId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_RegisterJoinEvents_EventId",
-                table: "RegisterJoinEvents",
-                column: "EventId");
         }
 
         /// <inheritdoc />
@@ -350,6 +327,9 @@ namespace ObjectBusiness.Migrations
                 name: "Comments");
 
             migrationBuilder.DropTable(
+                name: "Decentralizations");
+
+            migrationBuilder.DropTable(
                 name: "Feedbacks");
 
             migrationBuilder.DropTable(
@@ -362,16 +342,13 @@ namespace ObjectBusiness.Migrations
                 name: "Events");
 
             migrationBuilder.DropTable(
-                name: "Decentralizations");
-
-            migrationBuilder.DropTable(
-                name: "EventCategories");
+                name: "Roles");
 
             migrationBuilder.DropTable(
                 name: "Accounts");
 
             migrationBuilder.DropTable(
-                name: "Roles");
+                name: "EventCategories");
 
             migrationBuilder.DropTable(
                 name: "Users");
