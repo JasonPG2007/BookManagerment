@@ -51,6 +51,8 @@ namespace DataAccess
                           on b.AccountId equals c.AccountId
                           join d in db.Events
                           on c.DecentralizationId equals d.DecentralizationId
+                          join e in db.Users
+                          on b.UserId equals e.UserId
                           where d.EventId == id
                           select new Comment
                           {
@@ -59,7 +61,8 @@ namespace DataAccess
                               AccountId = b.AccountId,
                               CommentId = a.CommentId,
                               Interact = a.Interact,
-                              UserName = b.UserName
+                              UserName = b.UserName,
+                              Picture = e.Picture
                           };
             return comment;
         }

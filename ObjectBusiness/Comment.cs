@@ -26,6 +26,8 @@ namespace ObjectBusiness
         #region View Model
         [NotMapped]
         public string UserName { get; set; }
+        [NotMapped]
+        public string Picture { get; set; }
         #endregion
     }
 }

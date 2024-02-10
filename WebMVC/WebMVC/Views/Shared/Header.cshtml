@@ -1,5 +1,9 @@
-﻿@{
+﻿@using Repository
+@{
     var cookies = Context.Request.Cookies["userName"];
+
+    IUserRepository userRepository = new UserRepository();
+    var getUserInformation = userRepository.GetUserByIdToGetPicture(Convert.ToInt32(Context.Request.Cookies["idUser"]));
 }
 <!--================Header Area =================-->
 <header class="header_area">
@@ -40,7 +44,10 @@
                     @if (Context.Request.Cookies.ContainsKey("userName"))
                     {
                         <li class="nav-item submenu dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i style="font-size:25px" class="fa-solid fa-circle-user"></i></a>
+                            @foreach (var item in getUserInformation)
+                            {
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="~/upload/images/@item.Picture" width="25" height="25" style="object-fit:cover;border-radius: 50%;" /></a>
+                            }
                             <ul class="dropdown-menu">
                                 <li class="nav-item"><a class="nav-link" href="@Url.Action("","profile",new{id=Context.Request.Cookies["idAccount"]})">Profile</a></li>
                                 <li class="nav-item">

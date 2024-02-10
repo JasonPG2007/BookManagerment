@@ -200,6 +200,15 @@ namespace DataAccess
         }
         #endregion
 
+        #region GetUserByIdToGetPicture function
+        public IEnumerable<User> GetUserByIdToGetPicture(int id)
+        {
+            using var context = new BookContext();
+            var checkUserContains = context.Users.Where(u => u.UserId == id).ToList();
+            return checkUserContains;
+        }
+        #endregion
+
         #region GetUserById function
         public User GetUserById(int id)
         {

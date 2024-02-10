@@ -17,5 +17,7 @@ namespace Repository
         public IEnumerable<User> GetUsers() => UserDAO.Instance.GetUsers();
         public IEnumerable<User> GetFullName(string userName, string password) => UserDAO.Instance.GetFullName(userName, password);
         public IEnumerable<Account> GetUserAndAccount(string username) => UserDAO.Instance.GetUserAndAccount(username);
+        public User GetUserById(int id) => UserDAO.Instance.GetUserById(id);
+        public IEnumerable<User> GetUserByIdToGetPicture(int id) => UserDAO.Instance.GetUserByIdToGetPicture(id);
     }
 }

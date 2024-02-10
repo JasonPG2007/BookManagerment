@@ -16,5 +16,7 @@ namespace Repository
         public IEnumerable<User> GetUsers();
         public IEnumerable<User> GetFullName(string userName, string password);
         public IEnumerable<Account> GetUserAndAccount(string username);
+        public User GetUserById(int id);
+        public IEnumerable<User> GetUserByIdToGetPicture(int id);
     }
 }

@@ -177,7 +177,7 @@
                         <!-- Newsfeed Content -->
                         <!--===================================================-->
                         <div class="media-block">
-                            <a class="media-left" href="@Url.Action("","profile",new {id=item.AccountId})" title="profile"><img class="img-circle img-sm" alt="Profile Picture" src="~/image/icon_user.png"></a>
+                            <a class="media-left" href="@Url.Action("","profile",new {id=item.AccountId})" title="profile"><img class="img-circle img-sm" alt="Profile Picture" src="~/upload/images/@item.Picture"></a>
                             <div class="media-body">
                                 <div class="mar-btm" style="margin-left: 1%;">
                                     <a href="@Url.Action("","profile",new {id=item.AccountId})" class="btn-link text-semibold media-heading box-inline" title="profile">@item.UserName</a>
