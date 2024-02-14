@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -59,21 +60,32 @@ namespace DataAccess
             var book = context.Books.FirstOrDefault(b => b.BookId == id);
             return book;
         }
-        public void InsertBook(Book book)
+        public bool InsertBook(Book book)
         {
+            bool status = false;
             using var context = new BookContext();
             try
             {
                 context.Books.Add(book);
-                context.SaveChanges();
+                int isSuccessfully = context.SaveChanges();
+                if (isSuccessfully > 0)
+                {
+                    status = true;
+                }
+                else
+                {
+                    status = false;
+                }
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
+            return status;
         }
-        public void UpdateBook(Book book)
+        public bool UpdateBook(Book book)
         {
+            bool status = false;
             using var context = new BookContext();
             try
             {
@@ -81,16 +93,26 @@ namespace DataAccess
                 if (checkContains != null)
                 {
                     context.Entry<Book>(book).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-                    context.SaveChanges();
+                    int isSuccessfully = context.SaveChanges();
+                    if (isSuccessfully > 0)
+                    {
+                        status = true;
+                    }
+                    else
+                    {
+                        status = false;
+                    }
                 }
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
+            return status;
         }
-        public void DeleteBook(int id)
+        public bool DeleteBook(int id)
         {
+            bool status = false;
             using var context = new BookContext();
             try
             {
@@ -98,13 +120,22 @@ namespace DataAccess
                 if (checkContains != null)
                 {
                     context.Books.Remove(checkContains);
-                    context.SaveChanges();
+                    int isSuccessfully = context.SaveChanges();
+                    if (isSuccessfully > 0)
+                    {
+                        status = true;
+                    }
+                    else
+                    {
+                        status = false;
+                    }
                 }
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
+            return status;
         }
     }
 }

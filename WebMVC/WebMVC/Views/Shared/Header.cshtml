@@ -22,7 +22,7 @@
                     <li class="nav-item active"><a class="nav-link" href="@Url.Action("","home")">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="about.html">About us</a></li>
                     <li class="nav-item"><a class="nav-link" href="@Url.Action("","event")">Event</a></li>
-                    <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link" href="@Url.Action("","book")">Book</a></li>
                     <li class="nav-item submenu dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Blog</a>
                         <ul class="dropdown-menu">
@@ -46,7 +46,14 @@
                         <li class="nav-item submenu dropdown">
                             @foreach (var item in getUserInformation)
                             {
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="~/upload/images/@item.Picture" width="25" height="25" style="object-fit:cover;border-radius: 50%;" alt="avatar"/></a>
+                                if (item.Picture != null)
+                                {
+                                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="~/upload/images/@item.Picture" width="25" height="25" style="object-fit:cover;border-radius: 50%;" alt="avatar" /></a>
+                                }
+                                else
+                                {
+                                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="~/upload/images/icon_user.png" width="25" height="25" style="object-fit:cover;border-radius: 50%;" alt="avatar" /></a>
+                                }
                             }
                             <ul class="dropdown-menu">
                                 <li class="nav-item"><a class="nav-link" href="@Url.Action("","profile",new{id=Context.Request.Cookies["idAccount"]})">Profile</a></li>

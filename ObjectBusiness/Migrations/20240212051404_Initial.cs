@@ -246,6 +246,46 @@ namespace ObjectBusiness.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "DisLikeComments",
+                columns: table => new
+                {
+                    DisLikeId = table.Column<int>(type: "int", nullable: false),
+                    CommentId = table.Column<int>(type: "int", nullable: false),
+                    Quantity = table.Column<int>(type: "int", nullable: false),
+                    DateDisLike = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DisLikeComments", x => x.DisLikeId);
+                    table.ForeignKey(
+                        name: "FK_DisLikeComments_Comments_CommentId",
+                        column: x => x.CommentId,
+                        principalTable: "Comments",
+                        principalColumn: "CommentId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "LikeComments",
+                columns: table => new
+                {
+                    LikeId = table.Column<int>(type: "int", nullable: false),
+                    CommentId = table.Column<int>(type: "int", nullable: false),
+                    Quantity = table.Column<int>(type: "int", nullable: false),
+                    DateLike = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_LikeComments", x => x.LikeId);
+                    table.ForeignKey(
+                        name: "FK_LikeComments_Comments_CommentId",
+                        column: x => x.CommentId,
+                        principalTable: "Comments",
+                        principalColumn: "CommentId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.InsertData(
                 table: "Roles",
                 columns: new[] { "RoleId", "RoleName" },
@@ -299,6 +339,11 @@ namespace ObjectBusiness.Migrations
                 column: "RoleId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_DisLikeComments_CommentId",
+                table: "DisLikeComments",
+                column: "CommentId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Events_AccountId",
                 table: "Events",
                 column: "AccountId");
@@ -312,6 +357,11 @@ namespace ObjectBusiness.Migrations
                 name: "IX_Feedbacks_AccountId",
                 table: "Feedbacks",
                 column: "AccountId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_LikeComments_CommentId",
+                table: "LikeComments",
+                column: "CommentId");
         }
 
         /// <inheritdoc />
@@ -324,13 +374,16 @@ namespace ObjectBusiness.Migrations
                 name: "Books");
 
             migrationBuilder.DropTable(
-                name: "Comments");
-
-            migrationBuilder.DropTable(
                 name: "Decentralizations");
 
             migrationBuilder.DropTable(
+                name: "DisLikeComments");
+
+            migrationBuilder.DropTable(
                 name: "Feedbacks");
+
+            migrationBuilder.DropTable(
+                name: "LikeComments");
 
             migrationBuilder.DropTable(
                 name: "RegisterJoinEvents");
@@ -339,10 +392,13 @@ namespace ObjectBusiness.Migrations
                 name: "CategoryBooks");
 
             migrationBuilder.DropTable(
-                name: "Events");
+                name: "Roles");
 
             migrationBuilder.DropTable(
-                name: "Roles");
+                name: "Comments");
+
+            migrationBuilder.DropTable(
+                name: "Events");
 
             migrationBuilder.DropTable(
                 name: "Accounts");

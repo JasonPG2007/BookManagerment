@@ -11,8 +11,8 @@ namespace Repository
     {
         public IEnumerable<CategoryBook> GetCategories();
         public CategoryBook GetCategoryById(int id);
-        public void InsertCategory(CategoryBook category);
-        public void UpdateCategory(CategoryBook category);
-        public void DeleteCategory(int id);
+        public bool InsertCategory(CategoryBook category);
+        public bool UpdateCategory(CategoryBook category);
+        public bool DeleteCategory(int id);
     }
 }

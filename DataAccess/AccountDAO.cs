@@ -30,6 +30,16 @@ namespace DataAccess
         {
             db = new BookContext();
         }
+
+        #region GetAccount function
+        public IEnumerable<Account> GetAccount()
+        {
+            using var context = new BookContext();
+            var list = context.Accounts.ToList();
+            return list;
+        }
+        #endregion
+
         #region GetUserByIdAccount function
         public IEnumerable<Account> GetUserByIdAccount(int id)
         {

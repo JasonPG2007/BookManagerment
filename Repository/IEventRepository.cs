@@ -12,5 +12,8 @@ namespace Repository
         public IEnumerable<Event> GetEvents();
         public IEnumerable<EventViewModel> GetEventAndAccount();
         public Event GetEventById(int id);
+        public bool InsertEvent(Event events);
+        public bool UpdateEvent(Event events);
+        public bool DeleteEvent(int id);
     }
 }

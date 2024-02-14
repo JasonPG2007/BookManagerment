@@ -1,0 +1,41 @@
+﻿@model IEnumerable<ObjectBusiness.EventCategory>
+
+@{
+    ViewData["Title"] = "Category";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<!-- Table Start -->
+<div class="container-fluid pt-4 px-4">
+    <div class="row g-4">
+        <div class="col-12">
+            <h1>Category</h1>
+            <a href="~/admin/eventcategoryadmin/create" class="btn btn-danger">Create new</a>
+            <div class="bg-secondary rounded h-100 p-4">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">@Html.DisplayNameFor(model => model.CategoryId)</th>
+                                <th scope="col">@Html.DisplayNameFor(model => model.CategoryName)</th>
+                                <th scope="col">@Html.DisplayNameFor(model => model.CategoryDescription)</th>
+                                <th scope="col">@Html.DisplayNameFor(model => model.DateCreated)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <th>@item.CategoryId</th>
+                                    <td>@item.CategoryName</td>
+                                    <td>@item.CategoryDescription</td>
+                                    <td>@item.DateCreated</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Table End -->

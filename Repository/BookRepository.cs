@@ -10,14 +10,14 @@ namespace Repository
 {
     public class BookRepository : IBookRepository
     {
-        public void DeleteBook(int id) => BookDAO.Instance.DeleteBook(id);
+        public bool DeleteBook(int id) => BookDAO.Instance.DeleteBook(id);
 
         public Book GetBookById(int id) => BookDAO.Instance.GetBookById(id);
 
         public IEnumerable<Book> GetBooks() => BookDAO.Instance.GetBooks();
 
-        public void InsertBook(Book book) => BookDAO.Instance.InsertBook(book);
+        public bool InsertBook(Book book) => BookDAO.Instance.InsertBook(book);
 
-        public void UpdateBook(Book book) => BookDAO.Instance.UpdateBook(book);
+        public bool UpdateBook(Book book) => BookDAO.Instance.UpdateBook(book);
     }
 }

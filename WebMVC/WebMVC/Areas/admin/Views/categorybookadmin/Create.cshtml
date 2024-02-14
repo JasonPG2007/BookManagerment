@@ -1,0 +1,46 @@
+﻿@model ObjectBusiness.CategoryBook
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+
+    var optionsNull = new List<SelectListItem>()
+    {
+
+    };
+}
+<style>
+    .validation-summary-errors {
+        background-color: red;
+        color: white;
+        border-radius: 5px;
+    }
+</style>
+<div class="container-fluid pt-4 px-4">
+    <div class="row g-4">
+        <div class="col-12">
+            <h1>Create category book</h1>
+            <form action="Create" method="post">
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "")
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CategoryName, new { @class = "control-label" })
+                    @Html.EditorFor(model => model.CategoryName, new { htmlAttributes = new { @class = "form-control", @required = true } })
+                    @Html.ValidationMessageFor(model => model.CategoryName, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Set, new { @class = "control-label" })
+                    <br />
+                    @Html.EditorFor(model => model.Set, new { htmlAttributes = new { @class = "" } })
+                    @Html.ValidationMessageFor(model => model.Set, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+            <div>
+                <a href="~/admin/bookadmin"><i class="fa-solid fa-left-long"></i> Back to List</a>
+            </div>
+        </div>
+    </div>
+</div>

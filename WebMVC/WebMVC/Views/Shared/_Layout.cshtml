@@ -39,5 +39,21 @@
     <script src="~/js/stellar.js"></script>
     <script src="~/vendors/lightbox/simpleLightbox.min.js"></script>
     <script src="~/js/custom.js"></script>
+    <script>
+        window.onbeforeunload = function () {
+            // Gọi API logout thông qua XMLHttpRequest hoặc fetch
+            // Ví dụ sử dụng fetch:
+            fetch('/logout', {
+                method: 'POST'
+                // Các thông tin yêu cầu khác (headers, body) có thể được thêm vào đây
+            })
+                .then(response => {
+                    // Xử lý phản hồi từ API logout (nếu cần thiết)
+                })
+                .catch(error => {
+                    // Xử lý lỗi (nếu có)
+                });
+        };
+    </script>
 </body>
 </html>

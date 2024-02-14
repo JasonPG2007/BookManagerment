@@ -216,6 +216,27 @@ namespace ObjectBusiness.Migrations
                         });
                 });
 
+            modelBuilder.Entity("ObjectBusiness.DisLikeComment", b =>
+                {
+                    b.Property<int>("DisLikeId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CommentId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("DateDisLike")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.HasKey("DisLikeId");
+
+                    b.HasIndex("CommentId");
+
+                    b.ToTable("DisLikeComments");
+                });
+
             modelBuilder.Entity("ObjectBusiness.Event", b =>
                 {
                     b.Property<int>("EventId")
@@ -290,6 +311,27 @@ namespace ObjectBusiness.Migrations
                     b.HasIndex("AccountId");
 
                     b.ToTable("Feedbacks");
+                });
+
+            modelBuilder.Entity("ObjectBusiness.LikeComment", b =>
+                {
+                    b.Property<int>("LikeId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CommentId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("DateLike")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.HasKey("LikeId");
+
+                    b.HasIndex("CommentId");
+
+                    b.ToTable("LikeComments");
                 });
 
             modelBuilder.Entity("ObjectBusiness.RegisterJoinEvent", b =>
@@ -447,6 +489,17 @@ namespace ObjectBusiness.Migrations
                     b.Navigation("Role");
                 });
 
+            modelBuilder.Entity("ObjectBusiness.DisLikeComment", b =>
+                {
+                    b.HasOne("ObjectBusiness.Comment", "Comment")
+                        .WithMany("DisLikeComments")
+                        .HasForeignKey("CommentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Comment");
+                });
+
             modelBuilder.Entity("ObjectBusiness.Event", b =>
                 {
                     b.HasOne("ObjectBusiness.Account", "Account")
@@ -477,6 +530,17 @@ namespace ObjectBusiness.Migrations
                     b.Navigation("Account");
                 });
 
+            modelBuilder.Entity("ObjectBusiness.LikeComment", b =>
+                {
+                    b.HasOne("ObjectBusiness.Comment", "Comment")
+                        .WithMany("LikeComments")
+                        .HasForeignKey("CommentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Comment");
+                });
+
             modelBuilder.Entity("ObjectBusiness.Account", b =>
                 {
                     b.Navigation("Decentralization");
@@ -489,6 +553,13 @@ namespace ObjectBusiness.Migrations
             modelBuilder.Entity("ObjectBusiness.CategoryBook", b =>
                 {
                     b.Navigation("Books");
+                });
+
+            modelBuilder.Entity("ObjectBusiness.Comment", b =>
+                {
+                    b.Navigation("DisLikeComments");
+
+                    b.Navigation("LikeComments");
                 });
 
             modelBuilder.Entity("ObjectBusiness.EventCategory", b =>

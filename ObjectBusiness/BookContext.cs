@@ -17,6 +17,8 @@ namespace ObjectBusiness
         public virtual DbSet<Feedback> Feedbacks { get; set; }
         public virtual DbSet<Comment> Comments { get; set; }
         public virtual DbSet<RegisterJoinEvent> RegisterJoinEvents { get; set; }
+        public virtual DbSet<LikeComment> LikeComments { get; set; }
+        public virtual DbSet<DisLikeComment> DisLikeComments { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             var builder = new ConfigurationBuilder()

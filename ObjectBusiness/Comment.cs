@@ -22,6 +22,11 @@ namespace ObjectBusiness
         public DateTime DateComment { get; set; }
         [JsonIgnore]
         public virtual Event? Event { get; set; }
+        [JsonIgnore]
+        public virtual ICollection<LikeComment>? LikeComments { get; set; }
+        [JsonIgnore]
+        public virtual ICollection<DisLikeComment>? DisLikeComments { get; set; }
+
 
         #region View Model
         [NotMapped]
@@ -31,6 +36,10 @@ namespace ObjectBusiness
         [NotMapped]
         [Display(Name = "Account ID")]
         public int AccountId { get; set; }
+        [NotMapped]
+        public int Like {  get; set; }
+        [NotMapped]
+        public int DisLike { get; set; }
         #endregion
     }
 }

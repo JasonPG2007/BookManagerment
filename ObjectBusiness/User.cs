@@ -30,10 +30,14 @@ namespace ObjectBusiness
         public DateTime DateRegister { get; set; }
         [JsonIgnore]
         public virtual Account? Account { get; set; }
+
+        #region View Model
         [NotMapped]
         [JsonIgnore]
         public int AccountId { get; set; }
+        [JsonIgnore]
         [NotMapped]
-        public IFormFile AvatarImages { get; set; }
+        public string UserName { get; set; }
+        #endregion
     }
 }

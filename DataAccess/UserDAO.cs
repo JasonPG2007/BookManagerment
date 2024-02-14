@@ -206,6 +206,7 @@ namespace DataAccess
             var checkUserContains = from a in db.Users
                                     join b in db.Accounts
                                     on a.UserId equals b.UserId
+                                    where a.UserId == id
                                     select new User
                                     {
                                         UserId = a.UserId,
@@ -220,6 +221,7 @@ namespace DataAccess
                                         Region = a.Region,
                                         PhoneNumber = a.PhoneNumber,
                                         Picture = a.Picture,
+                                        UserName = b.UserName,
                                     };
             return checkUserContains;
         }

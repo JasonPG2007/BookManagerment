@@ -92,7 +92,16 @@ namespace DataAccess
             using var context = new BookContext();
             try
             {
-
+                context.Events.Add(events);
+                int isSuccessfully = context.SaveChanges();
+                if (isSuccessfully > 0)
+                {
+                    status = true;
+                }
+                else
+                {
+                    status = false;
+                }
             }
             catch (Exception ex)
             {
@@ -109,7 +118,16 @@ namespace DataAccess
                 var checkContains = GetEventById(events.EventId);
                 if (checkContains != null)
                 {
-
+                    context.Entry<Event>(events).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                    int isSuccessfully = context.SaveChanges();
+                    if (isSuccessfully > 0)
+                    {
+                        status = true;
+                    }
+                    else
+                    {
+                        status = false;
+                    }
                 }
             }
             catch (Exception ex)
@@ -127,7 +145,16 @@ namespace DataAccess
                 var checkContains = GetEventById(id);
                 if (checkContains != null)
                 {
-
+                    context.Events.Remove(checkContains);
+                    int isSuccessfully = context.SaveChanges();
+                    if (isSuccessfully > 0)
+                    {
+                        status = true;
+                    }
+                    else
+                    {
+                        status = false;
+                    }
                 }
             }
             catch (Exception ex)

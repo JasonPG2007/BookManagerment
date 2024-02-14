@@ -51,6 +51,10 @@ namespace DataAccess
                           on b.AccountId equals c.AccountId
                           join d in db.Users
                           on c.UserId equals d.UserId
+                          //join e in db.LikeComments
+                          //on a.CommentId equals e.CommentId
+                          //join f in db.DisLikeComments
+                          //on a.CommentId equals f.CommentId
                           where b.EventId == id
                           select new Comment
                           {
@@ -60,7 +64,9 @@ namespace DataAccess
                               CommentId = a.CommentId,
                               Interact = a.Interact,
                               UserName = c.UserName,
-                              Picture = d.Picture
+                              Picture = d.Picture,
+                              //Like = e.Quantity,
+                              //DisLike = f.Quantity
                           };
             return comment;
         }

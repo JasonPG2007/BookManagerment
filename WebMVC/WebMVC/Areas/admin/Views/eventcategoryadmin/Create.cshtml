@@ -1,0 +1,35 @@
+﻿@model ObjectBusiness.EventCategory
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="container-fluid pt-4 px-4">
+    <div class="row g-4">
+        <div class="col-12">
+            <h1>Create eventcategory</h1>
+            <form action="Create" method="post">
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "")
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CategoryName, new { @class = "control-label" })
+                    @Html.EditorFor(model => model.CategoryName, new { htmlAttributes = new { @class = "form-control", @required = true } })
+                    @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CategoryDescription, new { @class = "control-label" })
+                    @Html.EditorFor(model => model.CategoryDescription, new { htmlAttributes = new { @class = "form-control", @required = true } })
+                    @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+            <div>
+                <a href="~/admin/eventcategoryadmin"><i class="fa-solid fa-left-long"></i> Back to List</a>
+            </div>
+        </div>
+    </div>
+</div>
+

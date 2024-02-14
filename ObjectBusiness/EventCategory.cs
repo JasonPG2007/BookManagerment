@@ -16,7 +16,7 @@ namespace ObjectBusiness
         public int CategoryId { get; set; }
         [Display(Name = "Category name")]
         public string CategoryName { get; set; }
-        [Display(Name = "Category ID")]
+        [Display(Name = "Category description")]
         public string? CategoryDescription { get; set; }
         [Display(Name = "Date created")]
         public DateTime DateCreated { get; set; }

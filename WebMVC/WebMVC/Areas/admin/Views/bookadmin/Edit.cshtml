@@ -1,0 +1,112 @@
+﻿@model ObjectBusiness.Book
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+
+    var optionsNull = new List<SelectListItem>()
+    {
+
+    };
+}
+<style>
+    .validation-summary-errors {
+        background-color: red;
+        color: white;
+        border-radius: 5px;
+    }
+</style>
+<div class="container-fluid pt-4 px-4">
+    <div class="row g-4">
+        <div class="col-12">
+            <h1>Edit book</h1>
+            <form action="Edit" method="post" enctype="multipart/form-data">
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "")
+                <div class="form-group">
+                    @Html.LabelFor(model => model.BookId, new { @class = "control-label" })
+                    @Html.EditorFor(model => model.BookId, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                    @Html.ValidationMessageFor(model => model.BookId, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CategoryId, new { @class = "control-label" })
+                    @if (ViewBag.ItemsCategory != null)
+                    {
+                        @Html.DropDownListFor(model => model.CategoryId, ViewBag.ItemsCategory as IEnumerable<SelectListItem>, "Select 1 category", new { @class = "form-control", @required = true })
+                    }
+                    else
+                    {
+                        @Html.DropDownListFor(model => model.CategoryId, optionsNull, "There are no categories yet.", new { @class = "form-control", @required = true })
+                    }
+                    @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.BookName, new { @class = "control-label" })
+                    @Html.EditorFor(model => model.BookName, new { htmlAttributes = new { @class = "form-control", @required = true } })
+                    @Html.ValidationMessageFor(model => model.BookName, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Title, new { @class = "control-label" })
+                    @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control", @required = true } })
+                    @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Description, new { @class = "control-label" })
+                    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", @required = true } })
+                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Author, new { @class = "control-label" })
+                    @Html.EditorFor(model => model.Author, new { htmlAttributes = new { @class = "form-control", @required = true } })
+                    @Html.ValidationMessageFor(model => model.Author, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Content, new { @class = "control-label" })
+                    @Html.EditorFor(model => model.Content, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Price, new { @class = "control-label" })
+                    @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control", @type = "number" } })
+                    @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Picture, new { @class = "control-label col-md-2" })
+                    @Html.EditorFor(model => model.Picture, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                    <div class="col-md-10">
+                        <img id="preview" src="@Url.Content(ViewBag.Images==null?"~/Upload/images/book.jpg":"~/Upload/images/"+ViewBag.Images)" class="rounded-circle" height="40" width="40" />
+                        <br>
+
+                        @Html.EditorFor(model => model.Images, new { htmlAttributes = new { @class = "custom-file mt-3 mb-3" } })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Edit" class="btn btn-primary" />
+                </div>
+            </form>
+            <div>
+                <a href="~/admin/bookadmin"><i class="fa-solid fa-left-long"></i> Back to List</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+
+    Images.onchange = evt => {
+
+        const [file] = Images.files
+
+        if (file) {
+
+            preview.src = URL.createObjectURL(file);
+
+
+        }
+
+    }
+    var input = document.getElementById('IdFile');    // Lấy input bằng id
+    var randomId = Math.floor(Math.random() * 1000000000);  // Sinh số ngẫu nhiên giữa 0 và 100000
+    input.value = randomId;    // Thiết lập giá trị cho input
+</script>

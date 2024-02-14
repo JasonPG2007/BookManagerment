@@ -17,5 +17,6 @@ namespace Repository
         public bool GetUserName(string userName) => AccountDAO.Instance.GetUserName(userName);
         public bool ResetPassword(string userName, string newPassword) => AccountDAO.Instance.ResetPassword(userName, newPassword);
         public IEnumerable<Account> GetUserByIdAccount(int id) => AccountDAO.Instance.GetUserByIdAccount(id);
+        public IEnumerable<Account> GetAccount() => AccountDAO.Instance.GetAccount();
     }
 }

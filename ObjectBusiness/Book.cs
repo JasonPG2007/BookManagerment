@@ -35,7 +35,7 @@ namespace ObjectBusiness
         public bool Charges { get; set; }
         public int Star { get; set; } = 0; // Users rate by number of stars
         public string Picture { get; set; }
-        [Display(Name = "Date time")]
+        [Display(Name = "Date post")]
         public DateTime DateTime { get; set; } = DateTime.Now;
         [JsonIgnore]
         public virtual CategoryBook? Category { get; set; }

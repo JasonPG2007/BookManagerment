@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -14,7 +15,7 @@ namespace ObjectBusiness
         [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
         [Display(Name = "Event ID")]
         public int EventId { get; set; }
-        [Display(Name = "Category ID")]
+        [Display(Name = "Category event")]
         public int CategoryId { get; set; }
         [Display(Name = "Account ID")]
         public int AccountId { get; set; }
@@ -35,21 +36,23 @@ namespace ObjectBusiness
         public virtual EventCategory? Category { get; set; }
         //[JsonIgnore]
         //public virtual ICollection<RegisterJoinEvent>? RegisterJoinEvents { get; set; }
+        [NotMapped]
+        public IFormFile ImagesEvent { get; set; }
 
         #region View Model
         [NotMapped]
-        public string Avatar { get; set; }
+        public string? Avatar { get; set; }
         [NotMapped]
-        public string Content { get; set; }
+        public string? Content { get; set; }
         [NotMapped]
         [Display(Name = "User name")]
-        public string UserName { get; set; }
+        public string? UserName { get; set; }
         [NotMapped]
-        public string Address { get; set; }
+        public string? Address { get; set; }
         [NotMapped]
-        public string City { get; set; }
+        public string? City { get; set; }
         [NotMapped]
-        public string Region { get; set; }
+        public string? Region { get; set; }
         #endregion
     }
 }

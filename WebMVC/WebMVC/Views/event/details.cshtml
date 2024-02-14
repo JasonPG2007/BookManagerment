@@ -118,7 +118,7 @@
                     <!-- Trending Tittle -->
                     <div class="about-right mb-90">
                         <div class="about-img">
-                            <img src="~/upload/images/book.png" alt="img event" width="770" height="410.66" style="object-fit:cover">
+                            <img src="~/upload/images/@Html.DisplayFor(model => model.Picture)" alt="img event" width="770" height="410.66" style="object-fit:cover">
                         </div>
                         <div class="section-tittle mb-30 pt-30">
                             <h3 style="margin-top: 1%;">@Html.DisplayFor(model => model.EventName)</h3>
@@ -141,10 +141,10 @@
                 {
                     @using (Html.BeginForm("comment", "event", FormMethod.Post))
                     {
-                        @if (TempData.Peek("commentStatus") != null)
-                        {
-                            <p style="background-color:#52c5fd;color:black">@TempData["commentStatus"]</p>
-                        }
+                        @* @if (TempData.Peek("commentStatus") != null)
+                {
+                <p style="background-color:#52c5fd;color:black">@TempData["commentStatus"]</p>
+                } *@
                         @Html.TextAreaFor(model => model.Content, new { @class = "form-control", @row = "2", @placeholder = "What do you think about this event?", @required = true })
                         <div class="mar-top clearfix">
                             <button style="background-color:#52c5fd" class="btn btn-sm pull-right" type="submit" title="submit comment"><i class="fa fa-pencil fa-fw"></i> Comment</button>
@@ -186,8 +186,24 @@
                                 <p style="margin-left: 1%;">@item.Content</p>
                                 <div class="pad-ver">
                                     <div class="btn-group">
-                                        <a class="btn btn-sm btn-hover-success" href="#" title="Like comment"><i class="fa fa-thumbs-up"></i></a>
-                                        <a class="btn btn-sm btn-hover-danger" href="#" title="Dislike comment"><i class="fa fa-thumbs-down"></i></a>
+                                        @if (Context.Request.Cookies.ContainsKey("idAccount"))
+                                        {
+                                            @using (Html.BeginForm("emotion", "event", FormMethod.Post))
+                                            {
+                                                @Html.Hidden("likeComment", item.CommentId)
+                                                <button type="submit" style="background-color:transparent;" class="btn btn-sm btn-hover-success" title="Like comment"><i class="fa fa-thumbs-up"></i></button>@TempData["isLiked"]
+                                            }
+                                            @using (Html.BeginForm("emotion", "event", FormMethod.Post))
+                                            {
+                                                @Html.Hidden("disLikeComment", item.CommentId)
+                                                <button type="submit" style="background-color:transparent;" class="btn btn-sm btn-hover-danger" title="Dislike comment"><i class="fa fa-thumbs-down"></i></button>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <a href="@Url.Action("","login")" style="color:black;" class="btn btn-sm btn-hover-success" title="Like comment"><i class="fa fa-thumbs-up"></i></a>
+                                            <a href="@Url.Action("","login")" style="color:black;" class="btn btn-sm btn-hover-danger" title="Dislike comment"><i class="fa fa-thumbs-down"></i></a>
+                                        }
                                     </div>
                                     <a class="btn btn-sm btn-hover-primary" href="#" title="Reply comment">Reply</a>
                                 </div>

@@ -11,8 +11,8 @@ namespace Repository
     {
         public IEnumerable<Book> GetBooks();
         public Book GetBookById(int id);
-        public void InsertBook(Book book);
-        public void UpdateBook(Book book);
-        public void DeleteBook(int id);
+        public bool InsertBook(Book book);
+        public bool UpdateBook(Book book);
+        public bool DeleteBook(int id);
     }
 }

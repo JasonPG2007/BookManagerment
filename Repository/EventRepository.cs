@@ -13,5 +13,11 @@ namespace Repository
         public IEnumerable<Event> GetEvents() => EventDAO.Instance.GetEvents();
         public IEnumerable<EventViewModel> GetEventAndAccount() => EventDAO.Instance.GetEventAndAccount();
         public Event GetEventById(int id) => EventDAO.Instance.GetEventById(id);
+
+        public bool InsertEvent(Event events) => EventDAO.Instance.InsertEvent(events);
+
+        public bool UpdateEvent(Event events) => EventDAO.Instance.UpdateEvent(events);
+
+        public bool DeleteEvent(int id) => EventDAO.Instance.DeleteEvent(id);
     }
 }

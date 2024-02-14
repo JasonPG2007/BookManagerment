@@ -1,4 +1,5 @@
 ﻿using ObjectBusiness;
+using System.Net.NetworkInformation;
 
 namespace DataAccess
 {
@@ -32,21 +33,32 @@ namespace DataAccess
             var categoryBook = context.CategoryBooks.FirstOrDefault(c => c.CategoryId == id);
             return categoryBook;
         }
-        public void InsertCategory(CategoryBook category)
+        public bool InsertCategory(CategoryBook category)
         {
+            bool status = false;
             using var context = new BookContext();
             try
             {
                 context.CategoryBooks.Add(category);
-                context.SaveChanges();
+                int isSuccessfully = context.SaveChanges();
+                if (isSuccessfully > 0)
+                {
+                    status = true;
+                }
+                else
+                {
+                    status = false;
+                }
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
+            return status;
         }
-        public void UpdateCategory(CategoryBook category)
+        public bool UpdateCategory(CategoryBook category)
         {
+            bool status = false;
             using var context = new BookContext();
             var checkContains = GetCategoryById(category.CategoryId);
             if (checkContains != null)
@@ -54,16 +66,26 @@ namespace DataAccess
                 try
                 {
                     context.Entry<CategoryBook>(category).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-                    context.SaveChanges();
+                    int isSuccessfully = context.SaveChanges();
+                    if (isSuccessfully > 0)
+                    {
+                        status = true;
+                    }
+                    else
+                    {
+                        status = false;
+                    }
                 }
                 catch (Exception ex)
                 {
                     throw new Exception(ex.Message);
                 }
             }
+            return status;
         }
-        public void DeleteCategory(int id)
+        public bool DeleteCategory(int id)
         {
+            bool status = false;
             using var context = new BookContext();
             var checkContains = GetCategoryById(id);
             if (checkContains != null)
@@ -71,13 +93,22 @@ namespace DataAccess
                 try
                 {
                     context.CategoryBooks.Remove(checkContains);
-                    context.SaveChanges();
+                    int isSuccessfully = context.SaveChanges();
+                    if (isSuccessfully > 0)
+                    {
+                        status = true;
+                    }
+                    else
+                    {
+                        status = false;
+                    }
                 }
                 catch (Exception ex)
                 {
                     throw new Exception(ex.Message);
                 }
             }
+            return status;
         }
     }
 }

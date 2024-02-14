@@ -1,0 +1,52 @@
+﻿@model IEnumerable<ObjectBusiness.Event>
+
+@{
+    ViewData["Title"] = "Event";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<!-- Table Start -->
+<div class="container-fluid pt-4 px-4">
+    <div class="row g-4">
+        <div class="col-12">
+            <h1>Event</h1>
+            <a href="~/admin/eventadmin/create" class="btn btn-danger">Create new</a>
+            <div class="bg-secondary rounded h-100 p-4">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">@Html.DisplayNameFor(model => model.EventId)</th>
+                                <th scope="col">@Html.DisplayNameFor(model => model.CategoryId)</th>
+                                <th scope="col">@Html.DisplayNameFor(model => model.AccountId)</th>
+                                <th scope="col">@Html.DisplayNameFor(model => model.EventName)</th>
+                                <th scope="col">@Html.DisplayNameFor(model => model.EventDescription)</th>
+                                <th scope="col">@Html.DisplayNameFor(model => model.Content)</th>
+                                <th scope="col">@Html.DisplayNameFor(model => model.Picture)</th>
+                                <th scope="col">@Html.DisplayNameFor(model => model.NumberOfParticipants)</th>
+                                <th scope="col">@Html.DisplayNameFor(model => model.DateCreated)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <th>@item.EventId</th>
+                                    <th>@item.CategoryId</th>
+                                    <td>@item.AccountId</td>
+                                    <td>@item.EventName</td>
+                                    <td>@item.EventDescription</td>
+                                    <td>@item.Content</td>
+                                    <td><img src="~/upload/images/@item.Picture" alt="picture" width="50px" height="50px" style="object-fit:cover" /></td>
+                                    <td>@item.NumberOfParticipants</td>
+                                    <td>@item.DateCreated</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Table End -->
