@@ -101,7 +101,31 @@ namespace WebMVC.Areas.admin.Controllers
         // GET: eventadminController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            // dropdown category
+            var listCategory = eventCategoryRepository.GetEventCategory();
+            var seletList = new List<SelectListItem>();
+            foreach (var item in listCategory)
+            {
+                seletList.Add(new SelectListItem { Text = item.CategoryName, Value = item.CategoryId.ToString() });
+            }
+            if (seletList.Count() > 0)
+            {
+                ViewBag.ItemsCategory = seletList;
+            }
+
+            // dropdown account
+            var listAccount = accountRepository.GetAccount();
+            var seletListAccount = new List<SelectListItem>();
+            foreach (var item in listAccount)
+            {
+                seletListAccount.Add(new SelectListItem { Text = item.UserName, Value = item.AccountId.ToString() });
+            }
+            if (seletListAccount.Count() > 0)
+            {
+                ViewBag.ItemsAccount = seletListAccount;
+            }
+            var events = eventRepository.GetEventById(id);
+            return View(events);
         }
 
         // POST: eventadminController/Edit/5
@@ -157,6 +181,31 @@ namespace WebMVC.Areas.admin.Controllers
             }
             ViewBag.Images = events.ImagesEvent;
             return fileName;
+        }
+        #endregion
+
+        #region Delete Id
+        [HttpPost]
+        public JsonResult DeleteId(int id)
+        {
+            try
+            {
+                var record = eventRepository.GetEventById(id);
+                if (record == null)
+                {
+                    return Json(new { success = false, message = "This event could not be found." });
+                }
+                eventRepository.DeleteEvent(id);
+                /*return Json(new { success = true, id = id});*/
+                return Json(new
+                {
+                    status = true
+                });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message });
+            }
         }
         #endregion
     }

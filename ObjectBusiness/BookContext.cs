@@ -19,6 +19,7 @@ namespace ObjectBusiness
         public virtual DbSet<RegisterJoinEvent> RegisterJoinEvents { get; set; }
         public virtual DbSet<LikeComment> LikeComments { get; set; }
         public virtual DbSet<DisLikeComment> DisLikeComments { get; set; }
+        public virtual DbSet<Service> Services { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             var builder = new ConfigurationBuilder()
@@ -62,6 +63,11 @@ namespace ObjectBusiness
             // Add data table Decentralization
             modelBuilder.Entity<Decentralization>().HasData(
                 new Decentralization { DecentralizationId = 996554186, AccountId = 92687906, RoleId = 1 }
+                );
+
+            //Add data table Service
+            modelBuilder.Entity<Service>().HasData(
+                new Service { ServiceId = 26949135, ServiceName = "Customer care" }
                 );
         }
     }

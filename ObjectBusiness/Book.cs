@@ -16,9 +16,9 @@ namespace ObjectBusiness
         [Display(Name = "Book ID")]
         public int BookId { get; set; }
         [Required(ErrorMessage = "Please fill in this information.")]
-        [Display(Name = "Category Book")]
+        [Display(Name = "Category")]
         public int CategoryId { get; set; }
-        [Display(Name = "Book Name")]
+        [Display(Name = "Name")]
         [Required(ErrorMessage = "Please fill in this information.")]
         public string BookName { get; set; }
         [Required(ErrorMessage = "Please fill in this information.")]

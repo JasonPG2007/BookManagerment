@@ -13,15 +13,15 @@ namespace ObjectBusiness
     public class Event
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
-        [Display(Name = "Event ID")]
+        [Display(Name = "ID")]
         public int EventId { get; set; }
-        [Display(Name = "Category event")]
+        [Display(Name = "Category")]
         public int CategoryId { get; set; }
-        [Display(Name = "Account ID")]
+        [Display(Name = "Account")]
         public int AccountId { get; set; }
-        [Display(Name = "Event name")]
+        [Display(Name = "Name")]
         public string EventName { get; set; }
-        [Display(Name = "Event description")]
+        [Display(Name = "Description")]
         public string EventDescription { get; set; }
         [Display(Name = "Content")]
         public string EventContent { get; set; }

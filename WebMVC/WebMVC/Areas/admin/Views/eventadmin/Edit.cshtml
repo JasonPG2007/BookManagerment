@@ -1,7 +1,7 @@
 ﻿@model ObjectBusiness.Event
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Edit";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 <style>
@@ -14,10 +14,15 @@
 <div class="container-fluid pt-4 px-4">
     <div class="row g-4">
         <div class="col-12">
-            <h1>Create event</h1>
+            <h1>Edit event</h1>
             <form action="Create" method="post" enctype="multipart/form-data">
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary(true, "")
+                <div class="form-group">
+                    @Html.LabelFor(model => model.EventId, new { @class = "control-label" })
+                    @Html.EditorFor(model => model.EventId, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                    @Html.ValidationMessageFor(model => model.EventId, "", new { @class = "text-danger" })
+                </div>
                 <div class="form-group">
                     @Html.LabelFor(model => model.CategoryId, new { @class = "control-label" })
                     @Html.DropDownListFor(model => model.CategoryId, ViewBag.ItemsCategory as IEnumerable<SelectListItem>, "Select 1 category", new { @class = "form-control", @required = true })
@@ -47,6 +52,11 @@
                     @Html.LabelFor(model => model.NumberOfParticipants, new { @class = "control-label" })
                     @Html.EditorFor(model => model.NumberOfParticipants, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.NumberOfParticipants, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Picture, new { @class = "control-label" })
+                    @Html.EditorFor(model => model.Picture, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                    @Html.ValidationMessageFor(model => model.Picture, "", new { @class = "text-danger" })
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(model => model.Picture, new { @class = "control-label col-md-2" })

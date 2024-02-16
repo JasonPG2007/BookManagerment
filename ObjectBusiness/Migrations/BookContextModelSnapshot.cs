@@ -306,9 +306,21 @@ namespace ObjectBusiness.Migrations
                     b.Property<int>("AccountId")
                         .HasColumnType("int");
 
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Evaluate")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ServiceId")
+                        .HasColumnType("int");
+
                     b.HasKey("FeedbackId");
 
                     b.HasIndex("AccountId");
+
+                    b.HasIndex("ServiceId");
 
                     b.ToTable("Feedbacks");
                 });
@@ -372,6 +384,27 @@ namespace ObjectBusiness.Migrations
                         {
                             RoleId = 3,
                             RoleName = "User"
+                        });
+                });
+
+            modelBuilder.Entity("ObjectBusiness.Service", b =>
+                {
+                    b.Property<int>("ServiceId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ServiceName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ServiceId");
+
+                    b.ToTable("Services");
+
+                    b.HasData(
+                        new
+                        {
+                            ServiceId = 26949135,
+                            ServiceName = "Customer care"
                         });
                 });
 
@@ -527,7 +560,15 @@ namespace ObjectBusiness.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("ObjectBusiness.Service", "Service")
+                        .WithMany("Feedbacks")
+                        .HasForeignKey("ServiceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Account");
+
+                    b.Navigation("Service");
                 });
 
             modelBuilder.Entity("ObjectBusiness.LikeComment", b =>
@@ -570,6 +611,11 @@ namespace ObjectBusiness.Migrations
             modelBuilder.Entity("ObjectBusiness.Role", b =>
                 {
                     b.Navigation("Decentralizations");
+                });
+
+            modelBuilder.Entity("ObjectBusiness.Service", b =>
+                {
+                    b.Navigation("Feedbacks");
                 });
 
             modelBuilder.Entity("ObjectBusiness.User", b =>

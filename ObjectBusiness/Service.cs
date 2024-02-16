@@ -9,20 +9,14 @@ using System.Threading.Tasks;
 
 namespace ObjectBusiness
 {
-    public class Feedback
+    public class Service
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
-        [Display(Name = "Feedback ID")]
-        public int FeedbackId { get; set; }
-        [Display(Name = "Account ID")]
-        public int AccountId { get; set; }
         [Display(Name = "Service ID")]
         public int ServiceId { get; set; }
-        public int Evaluate { get; set; } // Max 10 star, Min 1 star
-        public string Content { get; set; }
+        [Display(Name = "Service name")]
+        public string ServiceName { get; set; }
         [JsonIgnore]
-        public virtual Account? Account { get; set; }
-        [JsonIgnore]
-        public virtual Service? Service { get; set; }
+        public virtual ICollection<Feedback>? Feedbacks { get; set; }
     }
 }

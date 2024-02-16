@@ -79,6 +79,18 @@ namespace ObjectBusiness.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Services",
+                columns: table => new
+                {
+                    ServiceId = table.Column<int>(type: "int", nullable: false),
+                    ServiceName = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Services", x => x.ServiceId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
                 {
@@ -212,7 +224,10 @@ namespace ObjectBusiness.Migrations
                 columns: table => new
                 {
                     FeedbackId = table.Column<int>(type: "int", nullable: false),
-                    AccountId = table.Column<int>(type: "int", nullable: false)
+                    AccountId = table.Column<int>(type: "int", nullable: false),
+                    ServiceId = table.Column<int>(type: "int", nullable: false),
+                    Evaluate = table.Column<int>(type: "int", nullable: false),
+                    Content = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -222,6 +237,12 @@ namespace ObjectBusiness.Migrations
                         column: x => x.AccountId,
                         principalTable: "Accounts",
                         principalColumn: "AccountId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Feedbacks_Services_ServiceId",
+                        column: x => x.ServiceId,
+                        principalTable: "Services",
+                        principalColumn: "ServiceId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -297,6 +318,11 @@ namespace ObjectBusiness.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "Services",
+                columns: new[] { "ServiceId", "ServiceName" },
+                values: new object[] { 26949135, "Customer care" });
+
+            migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "UserId", "Address", "Age", "City", "DateRegister", "Email", "FullName", "Gender", "PhoneNumber", "Picture", "Region" },
                 values: new object[] { 781404488, "Anonymous", 17, "Security", new DateTime(2024, 2, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), "anonymous@gmail.com", "Anonymous", true, "0911040107", "avatar.jpg", "Security" });
@@ -359,6 +385,11 @@ namespace ObjectBusiness.Migrations
                 column: "AccountId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Feedbacks_ServiceId",
+                table: "Feedbacks",
+                column: "ServiceId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_LikeComments_CommentId",
                 table: "LikeComments",
                 column: "CommentId");
@@ -393,6 +424,9 @@ namespace ObjectBusiness.Migrations
 
             migrationBuilder.DropTable(
                 name: "Roles");
+
+            migrationBuilder.DropTable(
+                name: "Services");
 
             migrationBuilder.DropTable(
                 name: "Comments");
