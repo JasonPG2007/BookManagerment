@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using ObjectBusiness;
 
 namespace WebMVC.Controllers
 {
@@ -8,14 +9,17 @@ namespace WebMVC.Controllers
         // GET: feedbackController
         public ActionResult Index()
         {
+            TempData["notification"] = TempData["status"];
             return View();
         }
 
         // GET: feedbackController/Details/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult feedback()
+        public ActionResult feedback(string content, string rating, string selectService, string otherService, Feedback feedback, Service service)
         {
+            TempData["status"] = "Feedback successfully.";
+            TempData.Keep();
             return RedirectToAction(nameof(Index));
         }
 
