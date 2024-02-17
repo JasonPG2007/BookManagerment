@@ -99,10 +99,10 @@ namespace WebMVC.Controllers
                 //user.Gender = account.Gender;
 
                 Account account2 = new Account();
-                account2.AccountId = accountId;
+                var getAccount = accountRepository.GetAccountById(accountId);
+                account2 = getAccount;
                 account2.UserId = Convert.ToInt32(userId);
                 account2.UserName = account.UserName;
-                account2.Password = account.Password;
 
                 var isAccountUpdated = accountRepository.UpdateAccount(account2);
                 var isUserUpdated = userRepository.UpdateUser(user);
