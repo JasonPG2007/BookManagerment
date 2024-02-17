@@ -18,5 +18,6 @@ namespace Repository
         public bool UpdateFeedBack(Feedback feedback) => FeedbackDAO.Instance.UpdateFeedBack(feedback);
 
         public bool DeleteFeedBack(int id) => FeedbackDAO.Instance.DeleteFeedBack(id);
+        public IEnumerable<Feedback> GetFeedbacksTop() => FeedbackDAO.Instance.GetFeedbacksTop();
     }
 }

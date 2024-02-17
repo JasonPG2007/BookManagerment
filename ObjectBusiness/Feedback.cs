@@ -26,5 +26,14 @@ namespace ObjectBusiness
         public virtual Account? Account { get; set; }
         [JsonIgnore]
         public virtual Service? Service { get; set; }
+
+        #region View Model
+        [NotMapped]
+        [JsonIgnore]
+        public string Avatar {  get; set; }
+        [NotMapped]
+        [JsonIgnore]
+        public string UserName { get; set; }
+        #endregion
     }
 }

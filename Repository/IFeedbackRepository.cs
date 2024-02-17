@@ -14,5 +14,6 @@ namespace Repository
         public bool InsertFeedBack(Feedback feedback);
         public bool UpdateFeedBack(Feedback feedback);
         public bool DeleteFeedBack(int id);
+        public IEnumerable<Feedback> GetFeedbacksTop();
     }
 }

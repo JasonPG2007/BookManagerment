@@ -9,6 +9,7 @@ namespace DataAccess
 {
     public class FeedbackDAO
     {
+        private readonly BookContext db;
         private static FeedbackDAO instance = null;
         private static readonly object Lock = new object();
         public static FeedbackDAO Instance
@@ -25,6 +26,34 @@ namespace DataAccess
                 }
             }
         }
+        public FeedbackDAO()
+        {
+            db = new BookContext();
+        }
+
+        #region GetFeedbacksTop function
+        public IEnumerable<Feedback> GetFeedbacksTop()
+        {
+            var list = (from a in db.Feedbacks
+                        join b in db.Accounts
+                        on a.AccountId equals b.AccountId
+                        join c in db.Users
+                        on b.UserId equals c.UserId
+                        orderby a.DateFeedBack descending
+                        select new Feedback
+                        {
+                            FeedbackId = a.FeedbackId,
+                            DateFeedBack = a.DateFeedBack,
+                            Content = a.Content,
+                            Avatar = c.Picture,
+                            UserName = b.UserName,
+                            Evaluate = a.Evaluate,
+                            ServiceId = a.ServiceId,
+                            AccountId = a.AccountId,
+                        }).Take(3);
+            return list;
+        }
+        #endregion
 
         #region GetFeedBacks function
         public IEnumerable<Feedback> GetFeedbacks()

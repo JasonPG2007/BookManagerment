@@ -1,6 +1,6 @@
 ﻿@{
     ViewData["Title"] = "Error";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 <style>
     .error-template {
@@ -31,9 +31,9 @@
                     Sorry, an error has occured, Requested page not found!
                 </div>
                 <div class="error-actions">
-                    <a href="@Url.Action("","home")" class="btn btn-primary btn-lg">
+                    <a href="~/admin/manager" class="btn btn-primary btn-lg">
                         <i class="fa-solid fa-house"></i>
-                        Take Me Home
+                        Take Me Back To Dashboard
                     </a><a href="" class="btn btn-default btn-lg"><i class="fa-solid fa-envelope"></i> Contact Support </a>
                 </div>
             </div>
