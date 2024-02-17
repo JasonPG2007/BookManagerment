@@ -12,7 +12,7 @@ using ObjectBusiness;
 namespace ObjectBusiness.Migrations
 {
     [DbContext(typeof(BookContext))]
-    [Migration("20240216124300_Initial")]
+    [Migration("20240217101358_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -82,7 +82,7 @@ namespace ObjectBusiness.Migrations
                         {
                             AccountId = 92687906,
                             DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Password = "Admin@123.cntt",
+                            Password = "998bc6b861d8579741a482c898e30ab2",
                             Point = 0f,
                             Star = 5,
                             UserId = 781404488,
@@ -310,8 +310,10 @@ namespace ObjectBusiness.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Content")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DateFeedBack")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("Evaluate")
                         .HasColumnType("int");
@@ -395,8 +397,13 @@ namespace ObjectBusiness.Migrations
                     b.Property<int>("ServiceId")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("DateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("OtherNameService")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("ServiceName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ServiceId");
@@ -407,6 +414,7 @@ namespace ObjectBusiness.Migrations
                         new
                         {
                             ServiceId = 26949135,
+                            DateTime = new DateTime(2024, 2, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ServiceName = "Customer care"
                         });
                 });

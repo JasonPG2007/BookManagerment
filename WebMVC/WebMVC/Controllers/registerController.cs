@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using DataAccess;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Repository;
 using WebMVC.Models;
@@ -41,7 +42,8 @@ namespace WebMVC.Controllers
                 }
                 if (model.ConfirmPassword.Equals(model.Password))
                 {
-                    var isRegister = userRepository.Register(model.UserName, model.Password, model.PhoneNumber, model.City, model.BirthName, model.Age, model.Address, model.Email, model.Region, genderAdd);
+                    string hashPassword = Common.EncryptMD5(model.Password);
+                    var isRegister = userRepository.Register(model.UserName, hashPassword, model.PhoneNumber, model.City, model.BirthName, model.Age, model.Address, model.Email, model.Region, genderAdd);
                     if (isRegister == "")
                     {
                         if (TempData["change_account"] != null)

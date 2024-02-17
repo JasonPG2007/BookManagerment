@@ -19,7 +19,9 @@ namespace ObjectBusiness
         [Display(Name = "Service ID")]
         public int ServiceId { get; set; }
         public int Evaluate { get; set; } // Max 10 star, Min 1 star
-        public string Content { get; set; }
+        public string? Content { get; set; }
+        [Display(Name = "Date feedback")]
+        public DateTime DateFeedBack { get; set; }
         [JsonIgnore]
         public virtual Account? Account { get; set; }
         [JsonIgnore]

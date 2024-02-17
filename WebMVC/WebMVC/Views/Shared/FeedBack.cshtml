@@ -58,7 +58,10 @@
                                     <select id="feedbackType" name="selectService" onchange="showInputField(this)" required>
                                         @foreach (var item in listService)
                                         {
-                                            <option value="@item.ServiceId">@item.ServiceName</option>
+                                            @if (item.ServiceName != null)
+                                            {
+                                                <option value="@item.ServiceId">@item.ServiceName</option>
+                                            }
                                         }
                                         <option value="other">Other</option>
                                     </select>
@@ -141,7 +144,10 @@ else
                                 <select id="feedbackType" name="service" onchange="showInputField(this)" required>
                                     @foreach (var item in listService)
                                     {
-                                        <option value="@item.ServiceId">@item.ServiceName</option>
+                                        @if (item.ServiceName != null)
+                                        {
+                                            <option value="@item.ServiceId">@item.ServiceName</option>
+                                        }
                                     }
                                     <option value="other">Other</option>
                                 </select>

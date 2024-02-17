@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using DataAccess;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Repository;
 
@@ -47,7 +48,8 @@ namespace WebMVC.Controllers
         {
             if (confirmPassword.Equals(forgotPassword))
             {
-                var check = accountRepository.ResetPassword(TempData["userName"].ToString(), confirmPassword);
+                string hashPassword = Common.EncryptMD5(confirmPassword);
+                var check = accountRepository.ResetPassword(TempData["userName"].ToString(), hashPassword);
                 if (check)
                 {
                     return RedirectToAction("", "login");

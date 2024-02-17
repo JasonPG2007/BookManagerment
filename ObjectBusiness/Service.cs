@@ -15,7 +15,11 @@ namespace ObjectBusiness
         [Display(Name = "Service ID")]
         public int ServiceId { get; set; }
         [Display(Name = "Service name")]
-        public string ServiceName { get; set; }
+        public string? ServiceName { get; set; }
+        [Display(Name = "Other service")]
+        public string? OtherNameService { get; set; }
+        [Display(Name = "Date create")]
+        public DateTime DateTime { get; set; }
         [JsonIgnore]
         public virtual ICollection<Feedback>? Feedbacks { get; set; }
     }

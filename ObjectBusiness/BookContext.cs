@@ -57,7 +57,7 @@ namespace ObjectBusiness
 
             // Add data table Account
             modelBuilder.Entity<Account>().HasData(
-                new Account { AccountId = 92687906, Password = "Admin@123.cntt", UserId = 781404488, UserName = "ADMIN", Star = 5 }
+                new Account { AccountId = 92687906, Password = "998bc6b861d8579741a482c898e30ab2", UserId = 781404488, UserName = "ADMIN", Star = 5 }
                 );
 
             // Add data table Decentralization
@@ -67,7 +67,7 @@ namespace ObjectBusiness
 
             //Add data table Service
             modelBuilder.Entity<Service>().HasData(
-                new Service { ServiceId = 26949135, ServiceName = "Customer care" }
+                new Service { ServiceId = 26949135, ServiceName = "Customer care", DateTime = new DateTime(2024, 02, 17) }
                 );
         }
     }

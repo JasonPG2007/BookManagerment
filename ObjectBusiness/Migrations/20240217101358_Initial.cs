@@ -83,7 +83,9 @@ namespace ObjectBusiness.Migrations
                 columns: table => new
                 {
                     ServiceId = table.Column<int>(type: "int", nullable: false),
-                    ServiceName = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    ServiceName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    OtherNameService = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DateTime = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -227,7 +229,8 @@ namespace ObjectBusiness.Migrations
                     AccountId = table.Column<int>(type: "int", nullable: false),
                     ServiceId = table.Column<int>(type: "int", nullable: false),
                     Evaluate = table.Column<int>(type: "int", nullable: false),
-                    Content = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Content = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DateFeedBack = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -319,8 +322,8 @@ namespace ObjectBusiness.Migrations
 
             migrationBuilder.InsertData(
                 table: "Services",
-                columns: new[] { "ServiceId", "ServiceName" },
-                values: new object[] { 26949135, "Customer care" });
+                columns: new[] { "ServiceId", "DateTime", "OtherNameService", "ServiceName" },
+                values: new object[] { 26949135, new DateTime(2024, 2, 17, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Customer care" });
 
             migrationBuilder.InsertData(
                 table: "Users",
@@ -330,7 +333,7 @@ namespace ObjectBusiness.Migrations
             migrationBuilder.InsertData(
                 table: "Accounts",
                 columns: new[] { "AccountId", "DateCreated", "Password", "Point", "Star", "UserId", "UserName" },
-                values: new object[] { 92687906, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Admin@123.cntt", 0f, 5, 781404488, "ADMIN" });
+                values: new object[] { 92687906, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "998bc6b861d8579741a482c898e30ab2", 0f, 5, 781404488, "ADMIN" });
 
             migrationBuilder.InsertData(
                 table: "Decentralizations",

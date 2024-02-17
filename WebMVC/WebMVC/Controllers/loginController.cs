@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authentication;
+﻿using DataAccess;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Repository;
@@ -32,14 +33,15 @@ namespace WebMVC.Controllers
         {
             if (userName != null && password != null)
             {
-                var checkUser = userRepository.Login(userName, password);
+                string hashPassword = Common.EncryptMD5(password);
+                var checkUser = userRepository.Login(userName, hashPassword);
                 if (checkUser != "This account does not exist.")
                 {
                     switch (checkUser)
                     {
                         case "Admin":
 
-                            var getUserNameAdmin = userRepository.GetFullName(userName, password);
+                            var getUserNameAdmin = userRepository.GetFullName(userName, hashPassword);
                             foreach (var item in getUserNameAdmin)
                             {
                                 Response.Cookies.Append("userName", "Admin");
@@ -59,7 +61,7 @@ namespace WebMVC.Controllers
                             });
                             return Redirect("~/admin/manager");
                         case "User":
-                            var getUserName = userRepository.GetFullName(userName, password);
+                            var getUserName = userRepository.GetFullName(userName, hashPassword);
                             foreach (var item in getUserName)
                             {
                                 Response.Cookies.Append("userName", item.FullName);
@@ -79,7 +81,7 @@ namespace WebMVC.Controllers
                             });
                             return RedirectToAction("", "home");
                         case "Staff":
-                            var getUserName2 = userRepository.GetFullName(userName, password);
+                            var getUserName2 = userRepository.GetFullName(userName, hashPassword);
                             foreach (var item in getUserName2)
                             {
                                 Response.Cookies.Append("userName", item.FullName);

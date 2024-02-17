@@ -23,8 +23,8 @@
 }
 <style>
     /*   input[type="file"] {
-                    display: none
-                } */
+                            display: none
+                        } */
 </style>
 @using (Html.BeginForm("edit", "profile", FormMethod.Post, new { @enctype = "multipart/form-data" }))
 {
@@ -70,7 +70,7 @@
                                         else
                                         {
                                             <label style="cursor:pointer" for="fileInput" class="fileInputLabel rounded-circle">
-                                                <img id="preview" src="~/upload/images/icon_user.png" class="fileIcon" alt="avatar" />
+                                                <img id="preview" src="~/upload/images/icon_user.png" class="fileIcon" alt="avatar" width="180" height="180" style="object-fit:cover" />
                                             </label>
                                             @Html.EditorFor(model => model.AvatarImages, new { htmlAttributes = new { @class = "custom-file mt-3 mb-3" } })
                                         }
@@ -135,8 +135,9 @@
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="form-group focused">
-                                            <label class="form-control-label" for="input-password">Password</label>
-                                            @Html.EditorFor(model => Model.Password, new { htmlAttributes = new { @id = "input-password", @class = "form-control form-control-alternative" } })
+                                            <label class="form-control-label">Password</label>
+                                            <br />
+                                            <a href="@Url.Action("","forgotpassword")" class="btn btn-primary">Change password</a>
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
