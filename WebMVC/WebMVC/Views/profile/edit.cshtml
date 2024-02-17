@@ -63,7 +63,7 @@
                                         @if (Model.Picture != null)
                                         {
                                             <label style="cursor:pointer" for="fileInput" class="fileInputLabel rounded-circle">
-                                                <img id="preview" src="~/upload/images/@Model.Picture" class="fileIcon" alt="avatar" />
+                                                <img id="preview" src="~/upload/images/@Model.Picture" class="fileIcon" alt="avatar" width="180" height="180" style="object-fit:cover" />
                                             </label>
                                             @Html.EditorFor(model => model.AvatarImages, new { htmlAttributes = new { @class = "custom-file mt-3 mb-3" } })
                                         }
