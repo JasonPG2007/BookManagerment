@@ -76,7 +76,7 @@
                             break;
                     }
                     <hr>
-                    <form action="reply" method="post">
+                    <form action="~/admin/feedbackadmin/details/@Model.FeedbackId" method="post">
                         @* @if (TempData.Peek("commentStatus") != null)
                         {
                         <p style="background-color:#52c5fd;color:black">@TempData["commentStatus"]</p>

@@ -29,6 +29,13 @@ namespace WebMVC.Areas.admin.Controllers
             return View("erroradmin");
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult details(string reply)
+        {
+            return View("adadadasdsad");
+        }
+
         // GET: feedbackadminController/Create
         public ActionResult Create()
         {
