@@ -58,8 +58,23 @@ namespace DataAccess
         #region GetFeedBacks function
         public IEnumerable<Feedback> GetFeedbacks()
         {
-            using var context = new BookContext();
-            var list = context.Feedbacks.ToList();
+            var list = from a in db.Feedbacks
+                       join b in db.Accounts
+                       on a.AccountId equals b.AccountId
+                       join c in db.Users
+                       on b.UserId equals c.UserId
+                       orderby a.DateFeedBack descending
+                       select new Feedback
+                       {
+                           FeedbackId = a.FeedbackId,
+                           DateFeedBack = a.DateFeedBack,
+                           Content = a.Content,
+                           Avatar = c.Picture,
+                           UserName = b.UserName,
+                           Evaluate = a.Evaluate,
+                           ServiceId = a.ServiceId,
+                           AccountId = a.AccountId,
+                       };
             return list;
         }
         #endregion
@@ -67,8 +82,23 @@ namespace DataAccess
         #region GetFeedBackById function
         public Feedback GetFeedBackById(int id)
         {
-            using var context = new BookContext();
-            var feedback = context.Feedbacks.FirstOrDefault(s => s.FeedbackId == id);
+            var feedback = (from a in db.Feedbacks
+                            join b in db.Accounts
+                            on a.AccountId equals b.AccountId
+                            join c in db.Users
+                            on b.UserId equals c.UserId
+                            where a.FeedbackId == id
+                            select new Feedback
+                            {
+                                FeedbackId = a.FeedbackId,
+                                DateFeedBack = a.DateFeedBack,
+                                Content = a.Content,
+                                Avatar = c.Picture,
+                                UserName = b.UserName,
+                                Evaluate = a.Evaluate,
+                                ServiceId = a.ServiceId,
+                                AccountId = a.AccountId,
+                            }).FirstOrDefault();
             return feedback;
         }
         #endregion

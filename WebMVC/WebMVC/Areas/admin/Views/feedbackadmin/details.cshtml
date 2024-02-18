@@ -4,5 +4,93 @@
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h1>details</h1>
+<div class="container-fluid pt-4 px-4">
+    <div class="panel">
+        <div class="panel-body">
+            <!-- Newsfeed Content -->
+            <!--===================================================-->
+            <div class="media-block">
+                <a class="media-left" href="@Url.Action("","profile",new {id=Model.AccountId})" title="profile"><img class="img-circle img-sm" alt="avatar" src="~/upload/images/@Model.Avatar" width="50px" height="50px" style="border-radius: 50%;"></a>
+                <div class="media-body">
+                    <a href="@Url.Action("","profile",new {id=Model.AccountId})" class="btn-link text-semibold media-heading box-inline" title="profile">@Model.UserName</a>
+                    <p class="text-muted text-sm">@Model.DateFeedBack</p>
+                    <p>@Model.Content</p>
+                    @switch (Model.Evaluate)
+                    {
+                        case 1:
+                            <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
+                            break;
+                        case 2:
+                            for (int i = 1; i < 3; i++)
+                            {
+                                <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
+                            }
+                            break;
+                        case 3:
+                            for (int i = 1; i < 4; i++)
+                            {
+                                <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
+                            }
+                            break;
+                        case 4:
+                            for (int i = 1; i < 5; i++)
+                            {
+                                <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
+                            }
+                            break;
+                        case 5:
+                            for (int i = 1; i < 6; i++)
+                            {
+                                <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
+                            }
+                            break;
+                        case 6:
+                            for (int i = 1; i < 7; i++)
+                            {
+                                <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
+                            }
+                            break;
+                        case 7:
+                            for (int i = 1; i < 8; i++)
+                            {
+                                <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
+                            }
+                            break;
+                        case 8:
+                            for (int i = 1; i < 9; i++)
+                            {
+                                <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
+                            }
+                            break;
+                        case 9:
+                            for (int i = 1; i < 10; i++)
+                            {
+                                <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
+                            }
+                            break;
+                        case 10:
+                            for (int i = 1; i < 11; i++)
+                            {
+                                <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
+                            }
+                            break;
+                    }
+                    <hr>
+                    <form action="reply" method="post">
+                        @* @if (TempData.Peek("commentStatus") != null)
+                        {
+                        <p style="background-color:#52c5fd;color:black">@TempData["commentStatus"]</p>
+                        } *@
+                        <textarea class="form-control" name="reply" rows="2" placeholder="What do you think about feedback?" required></textarea>
+                        <div class="mar-top clearfix">
+                            <button class="btn btn-danger" type="submit" title="Submit Reply"><i class="fa fa-pencil fa-fw"></i> Reply</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
