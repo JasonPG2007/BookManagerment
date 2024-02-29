@@ -1,10 +1,13 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ObjectBusiness;
 using Repository;
 
 namespace WebMVC.Controllers
 {
+    [Authorize(Roles = "Admin, User, Staff")]
+    [Authorize(AuthenticationSchemes = "Admin, User, Staff")]
     public class feedbackController : Controller
     {
         private readonly IFeedbackRepository feedbackRepository;
